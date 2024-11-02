@@ -1,6 +1,6 @@
 package Clases.Basicas;
 
-public abstract class Mortifago  implements Personaje {
+public abstract class Mortifago {
     protected String nombre;
     protected double mana;
     protected double vida;
@@ -8,5 +8,5 @@ public abstract class Mortifago  implements Personaje {
     //protected LinkedList<Hechizo> hechizos;
     protected boolean vive;
 
-    
+
 }
