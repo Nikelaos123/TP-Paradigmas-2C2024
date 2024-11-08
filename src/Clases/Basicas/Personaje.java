@@ -1,14 +1,18 @@
 package Clases.Basicas;
 
-public interface Personaje {
+public abstract class Personaje {
     
-    public void mostrarHechizos ();
+    private String nombre;
+    private double nivelMagia; //mana
+    private double puntosVida;
 
-    public void recibirDefensa (double puntosDefensa);
+    public abstract void mostrarHechizos ();
 
-    public void recibirSanacion (double puntosSanacion);
+    public abstract void recibirDefensa (double puntosDefensa);
 
-    public void recibirDanio (double puntosDanio);
+    public abstract void recibirSanacion (double puntosSanacion);
+
+    public abstract void recibirDanio (double puntosDanio);
 
 
     //public void lanzarHechizo ();
