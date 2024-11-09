@@ -4,11 +4,11 @@ import java.util.Random;
 
 public abstract class HechizoFactory {
 
-	private static final Random random = new Random();
+	private static final Random RANDOM = new Random();
 
 	public Hechizo crearHechizo(String nombre, int costo, int poder) {
 
-		int valorAleatorio = random.nextInt(HechizosEnum.obtenerCantidadValores());
+		int valorAleatorio = RANDOM.nextInt(HechizosEnum.obtenerCantidadValores());
 		HechizosEnum hechizoAleatorio = HechizosEnum.obtenerPorValor(valorAleatorio);
 
 		switch (hechizoAleatorio) {
