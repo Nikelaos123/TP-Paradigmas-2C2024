@@ -8,20 +8,21 @@ public abstract class HechizoFactory {
 
 	public Hechizo crearHechizo(String nombre, int costo, int poder) {
 
-		int tipoAleatorio = random.nextInt(2);
+		int valorAleatorio = random.nextInt(HechizosEnum.obtenerCantidadValores());
+		HechizosEnum hechizoAleatorio = HechizosEnum.obtenerPorValor(valorAleatorio);
 
-		switch (tipoAleatorio) {
-		case 0:
+		switch (hechizoAleatorio) {
+		
+		case ATAQUE:
 			return new HechizoAtaque(nombre, costo, poder);
-		case 1:
+		case DEFENSA:
 			return new HechizoSanacion(nombre, costo, poder);
-		case 2:
+		case SANACION:
 			return new HechizoDefensa(nombre, costo, poder);
 		default:
             throw new IllegalArgumentException("Hechizo desconocido");
 		}
 		
-
 	}
 
 }
