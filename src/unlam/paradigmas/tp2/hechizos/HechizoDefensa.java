@@ -20,10 +20,22 @@ public class HechizoDefensa implements Hechizo{
 		
 	}
 
+
+	@Override
+	public String getNombre() {
+		return nombre;
+	}
+
+	@Override
+	public double getPoder() {
+		return poder;
+	}
+
 	@Override
 	public double getCosto() {
 		return this.costo;
 	}
+	
 	
 	
 	

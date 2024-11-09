@@ -17,7 +17,16 @@ public class HechizoSanacion implements Hechizo {
 
 	public double ejecutar(Personaje objetivo, double manaActualPersonaje) {
 		return 0;
-		
+	}
+
+	@Override
+	public String getNombre() {
+		return nombre;
+	}
+
+	@Override
+	public double getPoder() {
+		return poder;
 	}
 
 	@Override

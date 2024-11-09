@@ -6,6 +6,8 @@ public interface Hechizo {
 	
 	public double ejecutar(Personaje objetivo, double manaActualPersonaje);
 	
+	public String getNombre();
+	public double getPoder();
 	public double getCosto();
 	// RARO
 	/*

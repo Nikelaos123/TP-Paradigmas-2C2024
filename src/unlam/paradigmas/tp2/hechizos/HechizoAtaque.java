@@ -16,6 +16,21 @@ public class HechizoAtaque implements Hechizo{
 		this.poder = poder;
 	}
 
+	@Override
+	public String getNombre() {
+		return nombre;
+	}
+
+	@Override
+	public double getPoder() {
+		return poder;
+	}
+
+	@Override
+	public double getCosto() {
+		return this.costo;
+	}
+
 	/*
 	public Hechizo getHechizo() {
 		return this;
@@ -27,9 +42,6 @@ public class HechizoAtaque implements Hechizo{
 		
 	}
 
-	@Override
-	public double getCosto() {
-		return this.costo;
-	}
+	
 
 }
