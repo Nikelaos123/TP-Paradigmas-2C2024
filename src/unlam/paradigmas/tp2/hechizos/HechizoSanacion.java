@@ -1,5 +1,22 @@
 package unlam.paradigmas.tp2.hechizos;
 
-public class HechizoSanacion implements Hechizo{
+import unlam.paradigmas.tp2.personajes.Personaje;
+
+public class HechizoSanacion implements Hechizo {
+
+	private String nombre;
+	private int costo;
+	private int poder;
+
+	public HechizoSanacion(String nombre, int costo, int poder) {
+
+		this.nombre = nombre;
+		this.costo = costo;
+		this.poder = poder;
+	}
+
+	public void ejecutar(Personaje objetivo) {
+
+	}
 
 }
