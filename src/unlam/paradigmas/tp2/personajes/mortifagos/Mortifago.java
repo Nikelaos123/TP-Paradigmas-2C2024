@@ -1,5 +1,7 @@
 package unlam.paradigmas.tp2.personajes.mortifagos;
 
-public abstract class Mortifago {
+import unlam.paradigmas.tp2.personajes.Personaje;
+
+public abstract class Mortifago extends Personaje {
 
 }

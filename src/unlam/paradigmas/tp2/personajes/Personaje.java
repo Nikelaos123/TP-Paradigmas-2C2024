@@ -16,6 +16,19 @@ public abstract class Personaje {
 
 
 	private List<Hechizo> hechizos;
+	
+
+
+	public Hechizo elegirHechizo(Batallon obj) {
+		//Implementa Strategy
+		return hechizos.get(0); //A reemplazar
+	}
+
+
+	public boolean getVivo() {
+		return vivo;
+	}
+
 
 	//retorna true si hay mana suficiente
 	public boolean verificarMana(){
@@ -33,14 +46,38 @@ public abstract class Personaje {
 		this.recibirMana(15);
 	}
 
-	public void lanzarHechizo(Hechizo hechizo, Personaje objetivo) {
-		
+	public boolean atacar(Batallon obj) {
+		if(!this.vivo)
+			return false;
+
 		if(!verificarMana())
 		{
 			this.descansar();
-			return;
+			return false;
 		}
 
+		
+		this.lanzarHechizo(elegirHechizo(obj), obj);
+		return true;
+	}
+
+	public boolean atacar(Personaje obj) {
+		if(!this.vivo)
+			return false;
+
+		if(!verificarMana())
+		{
+			this.descansar();
+			return false;
+		}
+
+		this.lanzarHechizo(elegirHechizo(), obj);
+		return true;
+	}
+
+	
+
+	public void lanzarHechizo(Hechizo hechizo, Personaje objetivo) {
 		
 		// QUE PASA CUANDO UN PERSONAJE SE QUEDA SIN MANA??? LISTO
 		// Y SI SE QUEDAN TODOS SIN MANA???????????????????????? UN BAJON

@@ -1,5 +1,7 @@
 package unlam.paradigmas.tp2.personajes.magos;
 
-public abstract class Mago {
+import unlam.paradigmas.tp2.personajes.Personaje;
+
+public abstract class Mago extends Personaje {
 
 }
