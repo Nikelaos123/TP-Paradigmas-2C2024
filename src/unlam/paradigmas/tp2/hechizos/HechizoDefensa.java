@@ -15,7 +15,7 @@ public class HechizoDefensa implements Hechizo{
 		this.poder = poder;
 	}
 	
-	public int ejecutar(Personaje objetivo, int manaActualPersonaje) {
+	public double ejecutar(Personaje objetivo, double manaActualPersonaje) {
 		return 0;
 		
 	}
