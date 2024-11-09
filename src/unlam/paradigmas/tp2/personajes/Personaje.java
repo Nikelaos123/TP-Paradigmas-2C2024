@@ -8,30 +8,51 @@ public abstract class Personaje {
 	private static final int DEFENSA_TOTAL = 1000;
 
 	private String nombre;
-	private int mana; // nivel de magia disponible para gastar en ejecutar hechizos
-	private int defensa; // puntos para disminuir el danio al recibir un ataque
-	private int vidaMaxima; // puntos de vida para poder recibir danio hasta morir
-	private int vidaActual;
+	private double mana; // nivel de magia disponible para gastar en ejecutar hechizos
+	private double defensa; // puntos para disminuir el danio al recibir un ataque
+	private double vidaMaxima; // puntos de vida para poder recibir danio hasta morir
+	private double vidaActual;
 	private boolean vivo = true;
 
-	//private List<Hechizo> hechizos;
 
+	private List<Hechizo> hechizos;
+
+	//retorna true si hay mana suficiente
+	public boolean verificarMana(){
+		double minMana = Double.MAX_VALUE;
+
+		for (Hechizo hechizo : hechizos) {
+			if( hechizo.getCosto() < minMana)
+				minMana = hechizo.getCosto();
+		}
+
+		return mana >= minMana;
+	}
 	
-	
+	public void descansar() {
+		this.recibirMana(15);
+	}
 
 	public void lanzarHechizo(Hechizo hechizo, Personaje objetivo) {
+		
+		if(!verificarMana())
+		{
+			this.descansar();
+			return;
+		}
 
-		// QUE PASA CUANDO UN PERSONAJE SE QUEDA SIN MANA???
-		// Y SI SE QUEDAN TODOS SIN MANA???????????????????????????????????????	
-		// RTA: LO TIENE QUE RESOLVER HECHIZO
+		
+		// QUE PASA CUANDO UN PERSONAJE SE QUEDA SIN MANA??? LISTO
+		// Y SI SE QUEDAN TODOS SIN MANA???????????????????????? UN BAJON
+		// RTA: LO TIENE QUE RESOLVER HECHIZO, nop descansan
 		
 		this.mana -= hechizo.ejecutar(objetivo, this.mana);
 	}
 
 	
-	private void sumarVida(int vida) {
+	private void sumarVida(double vida) {
 
-		int vidaCurada = vidaActual + vida;
+		double vidaCurada = vidaActual + vida;
 
 		if (vidaCurada > vidaMaxima) {
 			vidaActual = vidaMaxima;
@@ -41,11 +62,11 @@ public abstract class Personaje {
 		}
 	}
 	
-	private void restarVida(int danio) {
+	private void restarVida(double danio) {
 
-		int danioReducido = danio - (danio * (this.defensa / DEFENSA_TOTAL));
+		double danioReducido = danio - (danio * (this.defensa / DEFENSA_TOTAL));
 		
-		int vidaPerdida = vidaActual - danioReducido;
+		double vidaPerdida = vidaActual - danioReducido;
 
 		if (vidaPerdida <= 0) {
 			this.morir();
@@ -64,7 +85,7 @@ public abstract class Personaje {
 	}
 
 
-	public void recibirDefensa(int defensa) {
+	public void recibirDefensa(double defensa) {
 
 		if (!this.vivo) {
 			this.mensajeMuerto();
@@ -75,7 +96,18 @@ public abstract class Personaje {
 		}
 	}
 
-	public void recibirSanacion(int vida) {
+	public void recibirMana(double mana) {
+
+		if (!this.vivo) {
+			this.mensajeMuerto();
+
+		} else {
+
+			this.sumarVida(mana);
+		}
+	}
+
+	public void recibirSanacion(double vida) {
 
 		if (!this.vivo) {
 			this.mensajeMuerto();
@@ -86,7 +118,7 @@ public abstract class Personaje {
 		}
 	}
 
-	public void recibirAtaque(int danio) { // recibirAtaque(Hechizo hechizo) 
+	public void recibirAtaque(double danio) { // recibirAtaque(Hechizo hechizo) 
 		
 		if (!this.vivo) {
 			this.mensajeMuerto();

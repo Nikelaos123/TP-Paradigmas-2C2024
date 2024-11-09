@@ -5,8 +5,8 @@ import unlam.paradigmas.tp2.personajes.Personaje;
 public class HechizoSanacion implements Hechizo {
 
 	private String nombre;
-	private int costo;
-	private int poder;
+	private double costo;
+	private double poder;
 
 	public HechizoSanacion(String nombre, int costo, int poder) {
 
@@ -20,4 +20,8 @@ public class HechizoSanacion implements Hechizo {
 		
 	}
 
+	@Override
+	public double getCosto() {
+		return this.costo;
+	}
 }

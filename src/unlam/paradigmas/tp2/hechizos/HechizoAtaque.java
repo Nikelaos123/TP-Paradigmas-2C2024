@@ -5,8 +5,8 @@ import unlam.paradigmas.tp2.personajes.Personaje;
 public class HechizoAtaque implements Hechizo{
 	
 	private String nombre;
-	private int costo;
-	private int poder;
+	private double costo;
+	private double poder;
 	
 
 	public HechizoAtaque(String nombre, int costo, int poder) {
@@ -25,6 +25,11 @@ public class HechizoAtaque implements Hechizo{
 	public int ejecutar(Personaje objetivo, int manaActualPersonaje) {
 		return 0;
 		
+	}
+
+	@Override
+	public double getCosto() {
+		return this.costo;
 	}
 
 }
