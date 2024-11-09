@@ -15,8 +15,9 @@ public class HechizoSanacion implements Hechizo {
 		this.poder = poder;
 	}
 
-	public void ejecutar(Personaje objetivo) {
-
+	public int ejecutar(Personaje objetivo, int manaActualPersonaje) {
+		return 0;
+		
 	}
 
 }

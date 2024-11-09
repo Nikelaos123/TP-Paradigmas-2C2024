@@ -16,9 +16,15 @@ public class HechizoAtaque implements Hechizo{
 		this.poder = poder;
 	}
 
+	/*
+	public Hechizo getHechizo() {
+		return this;
+	}
+	*/
 	
-	public void ejecutar(Personaje objetivo) {
-
+	public int ejecutar(Personaje objetivo, int manaActualPersonaje) {
+		return 0;
+		
 	}
 
 }
