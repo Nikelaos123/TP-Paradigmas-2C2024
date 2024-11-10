@@ -1,10 +1,8 @@
 package unlam.paradigmas.tp2.personajes;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import unlam.paradigmas.tp2.personajes.magos.*;
-import unlam.paradigmas.tp2.personajes.mortifagos.*;
 
 public class BatallonMagos extends Batallon<Mago>{
 

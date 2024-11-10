@@ -1,6 +1,5 @@
 package unlam.paradigmas.tp2.personajes;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import unlam.paradigmas.tp2.personajes.mortifagos.Mortifago;

@@ -55,13 +55,20 @@ public class Main {
 		System.out.println("Defender? " + fm.decisionDefenderse(DEF));*/
 		
 		
-		HechizoFactory hechizoFactorysanacion = new CreadorHechizoSanacion();
+		/*HechizoFactory hechizoFactorysanacion = new CreadorHechizoSanacion();
 		HechizoFactory hechizoFactoryAtaque = new CreadorHechizoAtaque();
 		HechizoFactory hechizoFactoryDefensa = new CreadorHechizoDefensa();
 
 		hechizoFactorysanacion.crearHechizo();
 		hechizoFactoryAtaque.crearHechizo();
-		hechizoFactoryDefensa.crearHechizo();
+		hechizoFactoryDefensa.crearHechizo();*/
+
+
+		PersonajeFactory FabricaDePersonajes = new PersonajeFactory();
+
+		BatallonMagos batallonMagos = new BatallonMagos();
+
+		batallonMagos.agregar(FabricaDePersonajes.crearMago());
 		
 
 		/*try {

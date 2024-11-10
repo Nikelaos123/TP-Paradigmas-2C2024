@@ -2,28 +2,27 @@ package unlam.paradigmas.tp2.personajes;
 
 import unlam.FileManager.FileManager;
 import unlam.paradigmas.tp2.hechizos.Hechizo;
-import unlam.paradigmas.tp2.personajes.magos.Auror;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
 
 public abstract class Personaje {
 	
-	private static final int DEFENSA_TOTAL = 1000;
+	//private static final int DEFENSA_TOTAL = 1000;
 
-	private String nombre;
-	private double mana; // nivel de magia disponible para gastar en ejecutar hechizos
-	private double defensa; // puntos para disminuir el danio al recibir un ataque
+	protected String nombre;
+	protected double mana; // nivel de magia disponible para gastar en ejecutar hechizos
+	protected double defensa; // puntos para disminuir el danio al recibir un ataque
 	//private double vidaMaxima; // puntos de vida para poder recibir danio hasta morir???
-	private double vida;
-	private boolean vivo = true;
+	protected double vida;
+	protected boolean vivo = true;
 
 
-	private List<Hechizo> hechizos;
-	private int hechizoElegidoIndex = 0;
+	protected List<Hechizo> hechizos = new LinkedList<Hechizo>();
+	protected String nombreHechizoElegido;
 	//private String nombreRivalElegido = new String();
-	private int combatienteElegidoIndice = 0;
+	protected int combatienteElegidoIndice = 0;
 	
 	public String getNombre() {
 		return nombre;
@@ -38,6 +37,7 @@ public abstract class Personaje {
 		return vida;
 	}
 
+	
 	public Personaje(String nombre) {
 		super();
 		this.nombre = nombre;
@@ -58,6 +58,15 @@ public abstract class Personaje {
 		return this.getNombre().toLowerCase() + ", " + (int)this.getVida() + ", " + (int)this.getDefensa();
 	}
 
+	public void agregarHechizo(Hechizo hechizo){
+		this.hechizos.add(hechizo);
+	}
+
+	public void removerHechizo(String nombreHechizo){
+
+		hechizos.removeIf(hechizo -> hechizo.getNombre().equals(nombreHechizo));
+	
+	}
 
 	public Hechizo elegirHechizo(Batallon obj) {
 		//Implementa Strategy

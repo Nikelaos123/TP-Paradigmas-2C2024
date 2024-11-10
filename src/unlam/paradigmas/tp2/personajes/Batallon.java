@@ -20,13 +20,10 @@ public abstract class Batallon<T> {
     
     public abstract List<T> getBatallon();
 
-    public  List<Personaje> getBatallonCompleto(){
-        return (List<Personaje>)combatientes;
-    }
-
+    
     public abstract int getVivos();
 
-    public abstract void atacarEnGrupo(Batallon rivales);
+    public abstract void atacarEnGrupo(Batallon<T> rivales);
 
     public T getCombatiente(int index) {
         if(index > combatientes.size())

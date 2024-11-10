@@ -18,9 +18,9 @@ import unlam.paradigmas.tp2.personajes.BatallonMortifagos;
 public class FileManager {
 
     //Rutas relativas de archivos de prolog
-    private static String  filePathConocimientosMagos = "src/main/querys/rivalesMagos.pl"; //archivo actualizable por ronda
-    private static String  filePathConocimientosMortifagos = "src/main/querys/rivalesMortifagos.pl"; //archivo actualizable por ronda
-    private static String filePathFunciones = "src/main/querys/consultas.pl"; //archivo a no modificar
+    private static final String  filePathConocimientosMagos = "src/main/querys/rivalesMagos.pl"; //archivo actualizable por ronda
+    private static final String  filePathConocimientosMortifagos = "src/main/querys/rivalesMortifagos.pl"; //archivo actualizable por ronda
+    private static final String filePathFunciones = "src/main/querys/consultas.pl"; //archivo a no modificar
 
     Query query;
 

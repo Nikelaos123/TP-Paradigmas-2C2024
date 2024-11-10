@@ -1,7 +1,6 @@
 package unlam.paradigmas.tp2.hechizos;
 
 
-import java.util.Random;
 
 public class CreadorHechizoSanacion extends HechizoFactory{
 	
