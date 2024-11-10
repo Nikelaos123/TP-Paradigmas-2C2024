@@ -3,7 +3,6 @@ package unlam.paradigmas.tp2.personajes;
 import java.util.LinkedList;
 import java.util.List;
 
-import unlam.paradigmas.tp2.personajes.magos.Mago;
 
 
 public abstract class Batallon<T> {
@@ -13,6 +12,10 @@ public abstract class Batallon<T> {
     public Batallon() {
         super();
         combatientes = new LinkedList<T>();
+    }
+
+    public void agregar(T combatiente) {
+        combatientes.addLast(combatiente);
     }
 
     public abstract List<T> getBatallon();

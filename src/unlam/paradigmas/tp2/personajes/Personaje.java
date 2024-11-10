@@ -1,6 +1,8 @@
 package unlam.paradigmas.tp2.personajes;
 
 import unlam.paradigmas.tp2.hechizos.Hechizo;
+import unlam.paradigmas.tp2.personajes.magos.Auror;
+
 import java.util.List;
 
 public abstract class Personaje {
@@ -57,7 +59,7 @@ public abstract class Personaje {
 		}
 
 		
-		this.lanzarHechizo(elegirHechizo(obj), obj);
+		this.lanzarHechizo(elegirHechizo(obj), new Auror());
 		return true;
 	}
 
@@ -71,7 +73,7 @@ public abstract class Personaje {
 			return false;
 		}
 
-		this.lanzarHechizo(elegirHechizo(), obj);
+		this.lanzarHechizo(elegirHechizo(null), new Auror());
 		return true;
 	}
 

@@ -39,6 +39,8 @@ public class batallonMagos extends Batallon<Mago>{
         if(getVivos() == 0)
             return; //Se podría agregar un mensaje
 
+
+        
         for (Mago mago : combatientes) {
             mago.atacar(rivales);
         }
