@@ -9,7 +9,7 @@ public interface Hechizo {
 	public String getNombre();
 	public double getPoder();
 	public double getCosto();
-	// RARO
+	// RARO -> para nada
 	/*
 	public Hechizo getCosto();
 	public Hechizo getPoder();

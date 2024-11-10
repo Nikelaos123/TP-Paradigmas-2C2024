@@ -20,6 +20,10 @@ public abstract class Batallon<T> {
     
     public abstract List<T> getBatallon();
 
+    public  List<Personaje> getBatallonCompleto(){
+        return (List<Personaje>)combatientes;
+    }
+
     public abstract int getVivos();
 
     public abstract void atacarEnGrupo(Batallon rivales);

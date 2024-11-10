@@ -10,6 +10,12 @@ import org.jpl7.Query;
 import org.jpl7.Term;
 import org.jpl7.Variable;
 
+import unlam.FileManager.FileManager;
+import unlam.paradigmas.tp2.hechizos.CreadorHechizoAtaque;
+import unlam.paradigmas.tp2.hechizos.CreadorHechizoDefensa;
+import unlam.paradigmas.tp2.hechizos.CreadorHechizoSanacion;
+import unlam.paradigmas.tp2.hechizos.HechizoFactory;
+import unlam.paradigmas.tp2.hechizos.HechizoSanacion;
 import unlam.paradigmas.tp2.personajes.*;
 import unlam.paradigmas.tp2.personajes.magos.*;
 import unlam.paradigmas.tp2.personajes.mortifagos.*;
@@ -19,7 +25,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		
+		/* 
 		PersonajeFactory pf1 = new PersonajeFactory();
 		
 		BatallonMagos batallonMagos = new BatallonMagos();
@@ -35,7 +41,27 @@ public class Main {
 		
 		String filePath = "C:/Users/urano/eclipse-workspace/TP/TP-Paradigmas-2C2024/src/main/consultas.pl";
 		String filePathConocimientos = "src/main/querys/rivales.pl";
-		String filePathFunciones = "src/main/querys/consultas.pl";
+		String filePathFunciones = "src/main/querys/consultas.pl";*/
+
+
+		/*double HP = 20;
+		double DEF = 10;
+		System.out.println("Vida: " + HP);
+		System.out.println("Defensa: " + DEF);
+
+		FileManager fm = new FileManager();
+
+		System.out.println("Curar? " + fm.decisionCurarse(HP));
+		System.out.println("Defender? " + fm.decisionDefenderse(DEF));*/
+		
+		
+		HechizoFactory hechizoFactorysanacion = new CreadorHechizoSanacion();
+		HechizoFactory hechizoFactoryAtaque = new CreadorHechizoAtaque();
+		HechizoFactory hechizoFactoryDefensa = new CreadorHechizoDefensa();
+
+		hechizoFactorysanacion.crearHechizo();
+		hechizoFactoryAtaque.crearHechizo();
+		hechizoFactoryDefensa.crearHechizo();
 		
 
 		/*try {
@@ -59,7 +85,7 @@ public class Main {
 		
 		//String filePath = "C:/Users/Abigail/Downloads/consultas.pl";
 
-
+/*
 		//Obtengo datos
 		Query q = new Query("consult('" + filePathConocimientos + "')");
 		// Verifica si el archivo se cargó correctamente

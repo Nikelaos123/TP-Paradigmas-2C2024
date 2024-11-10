@@ -1,5 +1,6 @@
 package unlam.paradigmas.tp2.personajes;
 
+import unlam.FileManager.FileManager;
 import unlam.paradigmas.tp2.hechizos.Hechizo;
 import unlam.paradigmas.tp2.personajes.magos.Auror;
 
@@ -61,6 +62,10 @@ public abstract class Personaje {
 	public Hechizo elegirHechizo(Batallon obj) {
 		//Implementa Strategy
 		
+		FileManager fm = new FileManager();
+
+		//Consulta si tiene el hechizo de curacion y si debe usar hechizo sanacion
+		
 		
 		
 		return hechizos.get(0); //A reemplazar
@@ -71,6 +76,11 @@ public abstract class Personaje {
 		return vivo;
 	}
 
+	//A usar en FileManager cuando se muestra el Log
+	public String darReporte(){
+		return this.getNombre() + " / HP:  " + this.getVida() + " / MP:" + this.getMana() + " / DEF: " +
+				this.getDefensa() + " / Estado: " + (this.getVivo()?  "OK" : "Eliminado");
+	}
 
 	//retorna true si hay mana suficiente
 	public boolean verificarMana(){

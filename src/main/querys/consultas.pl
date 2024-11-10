@@ -17,8 +17,6 @@ curarse(Vida):- Vida < 50.
 
 defenderse(Defensa):- Defensa < 25.
 
-
-
 menosVida(Rival) :-
     rival(Rival, Vida, Def), Vida > 0, PT1 is Vida + Def,
     \+ ( rival(_, VidaMenor, DefMenor), VidaMenor > 0,

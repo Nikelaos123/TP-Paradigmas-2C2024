@@ -9,6 +9,18 @@ public class HechizoAtaque implements Hechizo{
 	private double poder;
 	
 
+	//Niveles de Ataque:
+	//Debil: 25 / 75
+	//Comun: 30 / 125 -> Default
+	//Fuerte: 35 / 200
+
+	public HechizoAtaque() {
+		
+		this.nombre = "Ataque - Comun";
+		this.costo = 30;
+		this.poder = 125;
+	}
+
 	public HechizoAtaque(String nombre, int costo, int poder) {
 		
 		this.nombre = nombre;
