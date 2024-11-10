@@ -34,12 +34,13 @@ public class Main {
 		System.out.println("Vivos: " + batallonMagos.getVivos() );
 		
 		String filePath = "C:/Users/urano/eclipse-workspace/TP/TP-Paradigmas-2C2024/src/main/consultas.pl";
-		
+		String filePathConocimientos = "src/main/querys/rivales.pl";
+		String filePathFunciones = "src/main/querys/consultas.pl";
 		
 
-		try {
+		/*try {
 			// Crear el archivo Prolog
-			FileWriter logger = new FileWriter("rivales.pl");
+			FileWriter logger = new FileWriter("src/main/querys/rivales.pl");
 
 			// Escribir los hechos en el archivo
 			for (Mago mago : batallonMagos.getMagos()) {
@@ -47,28 +48,51 @@ public class Main {
 			}
 
 			logger.close();
+			System.out.println("Archivo generado con éxito!");
 
 		} catch (Exception e) {
 			System.out.println("Error al escribir el log.");
 			e.printStackTrace();
-		}
-		/*
+		}*/
+		
 		//System.out.println("testsita");
 		
 		//String filePath = "C:/Users/Abigail/Downloads/consultas.pl";
 
-		Query cargarArchivo = new Query("consult('" + filePath + "')");
+
+		//Obtengo datos
+		Query q = new Query("consult('" + filePathConocimientos + "')");
 		// Verifica si el archivo se cargó correctamente
 
-		if(cargarArchivo.hasSolution()) {
+		if(q.hasSolution()) {
 			System.out.println("Archivo Prolog cargado correctamente.");
 		} else {
 			System.out.println("No se pudo cargar el archivo Prolog.");
 			return;
 		}
+
+
+		//Obtengo Funciones
+		q = new Query("consult('" + filePathFunciones + "')");
+		// Verifica si el archivo se cargó correctamente
+
+		if(q.hasSolution()) {
+			System.out.println("Archivo Prolog cargado correctamente.");
+		} else {
+			System.out.println("No se pudo cargar el archivo Prolog.");
+			return;
+		}
+
+		q = new Query("menosVida(R)");
+
+
+		while(q.hasMoreSolutions()) {
+			System.out.println(q.nextSolution().get("R"));
+		}
+
+
 		
-		
-		
+		/*
 		// Consultar si el hecho "hechizo(expecto_patronum)" es verdadero
 		Query consultaHechizo = new Query("menosVida(R)");
 		
