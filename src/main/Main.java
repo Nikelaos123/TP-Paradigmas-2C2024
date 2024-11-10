@@ -1,6 +1,5 @@
 package main;
 
-import org.jpl7.*;
 
 import unlam.paradigmas.tp2.personajes.*;
 import unlam.paradigmas.tp2.personajes.magos.Auror;
@@ -9,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
  
-		// System.out.println("testsita");
+		System.out.println("testsita");
 
 		// Auror m1 = new Auror();
 		
@@ -21,12 +20,12 @@ public class Main {
 		// System.out.println(batallonMagos1.getVivos());
 
 		try {
-			// String connect = "consult('a.pl')"; //../unlam/paradigmas/tp2/
-			// Query con = new Query(connect);
-			// System.out.println(con.hasMoreSolutions());
+//			String connect = "consult('a.pl')"; //../unlam/paradigmas/tp2/
+//			Query con = new Query(connect);
+//			System.out.println(con.hasMoreSolutions());
 
-			 Query q1 = new Query("consult", new Term[] {new Atom("a.pl")});
-			 System.out.println( "consult " + (q1.hasSolution() ? "succeeded" : "failed"));
+			//  Query q1 = new Query("consult", new Term[] {new Atom("a.pl")});
+			//  System.out.println( "consult " + (q1.hasSolution() ? "succeeded" : "failed"));
 			// System.out.println(System.getProperty("java.library.path"));
 		} catch (Exception e) {
 			System.out.println("PORFA");
