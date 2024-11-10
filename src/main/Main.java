@@ -9,6 +9,7 @@ import org.jpl7.Atom;
 import org.jpl7.Query;
 import org.jpl7.Term;
 import org.jpl7.Variable;
+import org.jpl7.fli.fid_t;
 
 import unlam.FileManager.FileManager;
 import unlam.paradigmas.tp2.hechizos.CreadorHechizoAtaque;
@@ -67,8 +68,20 @@ public class Main {
 		PersonajeFactory FabricaDePersonajes = new PersonajeFactory();
 
 		BatallonMagos batallonMagos = new BatallonMagos();
+		BatallonMortifagos batallonMortigafos = new BatallonMortifagos();
 
 		batallonMagos.agregar(FabricaDePersonajes.crearMago());
+		batallonMagos.agregar(FabricaDePersonajes.crearMago());
+		batallonMagos.agregar(FabricaDePersonajes.crearMago());
+		batallonMagos.agregar(FabricaDePersonajes.crearMago());
+
+		batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
+		batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
+		batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
+		batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
+
+		FileManager fm = new FileManager();
+		fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
 		
 
 		/*try {

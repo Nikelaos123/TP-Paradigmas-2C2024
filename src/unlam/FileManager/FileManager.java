@@ -40,6 +40,7 @@ public class FileManager {
 
     public void mostrarLogCompleto(BatallonMagos batallonMagos, BatallonMortifagos batallonMortifagos) {
 
+        
         System.out.println("- - - - Reporte completo - - - - ");
 
         this.mostrarLogMagos(batallonMagos);
@@ -52,6 +53,11 @@ public class FileManager {
 
     public void mostrarLogMagos(BatallonMagos batallonMagos) {
 
+        if(batallonMagos == null || batallonMagos.getTotalCombatientes() == 0) {
+            System.out.println("-> No hay magos");
+            return;
+        }
+
         System.out.println("-> Magos");
         
         for (Mago mago : batallonMagos.getBatallon()) {
@@ -61,6 +67,11 @@ public class FileManager {
     }
 
     public void mostrarLogMortifagos(BatallonMortifagos batallonMortifagos) {
+
+        if(batallonMortifagos == null || batallonMortifagos.getTotalCombatientes() == 0) {
+            System.out.println("-> No hay Mortifagos");
+            return;
+        }
 
         System.out.println("-> Mortigafos");
         

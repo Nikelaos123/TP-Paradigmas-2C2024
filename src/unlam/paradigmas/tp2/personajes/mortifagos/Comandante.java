@@ -20,4 +20,8 @@ public class Comandante extends Mortifago{
 	public Comandante(String nombre, double mana, double defensa, double vida) {
 		super(nombre,  mana,  defensa,  vida);
 	}
+
+	public String darReporte(){
+		return  "(Comandante)" + super.darReporte();
+	}
 }

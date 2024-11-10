@@ -17,4 +17,8 @@ public class Profesor extends Mago{
 	public Profesor(String nombre, double mana, double defensa, double vida) {
 		super(nombre,  mana,  defensa,  vida);
 	}
+
+	public String darReporte(){
+		return  "(Profesor)" + super.darReporte();
+	}
 }

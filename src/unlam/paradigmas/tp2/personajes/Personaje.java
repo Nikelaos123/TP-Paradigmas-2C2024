@@ -88,7 +88,8 @@ public abstract class Personaje {
 	//A usar en FileManager cuando se muestra el Log
 	public String darReporte(){
 		return this.getNombre() + " / HP:  " + this.getVida() + " / MP:" + this.getMana() + " / DEF: " +
-				this.getDefensa() + " / Estado: " + (this.getVivo()?  "OK" : "Eliminado");
+				this.getDefensa() + "/ Hechizos: " + hechizos.size() +
+				" / Estado: " + (this.getVivo()?  "OK" : "Eliminado");
 	}
 
 	//retorna true si hay mana suficiente

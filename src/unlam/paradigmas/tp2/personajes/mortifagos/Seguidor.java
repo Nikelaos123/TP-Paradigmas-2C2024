@@ -18,4 +18,8 @@ public class Seguidor extends Mortifago{
 	public Seguidor(String nombre, double mana, double defensa, double vida) {
 		super(nombre,  mana,  defensa,  vida);
 	}
+
+	public String darReporte(){
+		return  "(Seguidor)" + super.darReporte();
+	}
 }

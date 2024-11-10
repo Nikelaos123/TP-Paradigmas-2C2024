@@ -20,6 +20,9 @@ public abstract class Batallon<T> {
     
     public abstract List<T> getBatallon();
 
+    public int getTotalCombatientes() {
+        return combatientes.size();
+    }
     
     public abstract int getVivos();
 
