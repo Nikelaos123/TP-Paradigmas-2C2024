@@ -6,7 +6,7 @@ import java.util.List;
 import unlam.paradigmas.tp2.personajes.magos.*;
 import unlam.paradigmas.tp2.personajes.mortifagos.*;
 
-public class batallonMagos extends Batallon<Mago>{
+public class BatallonMagos extends Batallon<Mago>{
 
     
     //ctor aplicado al padre
@@ -33,6 +33,8 @@ public class batallonMagos extends Batallon<Mago>{
 
         return totalVivos;
     }
+    
+    
 
     @Override
     public void atacarEnGrupo(Batallon rivales) {
@@ -44,6 +46,13 @@ public class batallonMagos extends Batallon<Mago>{
         for (Mago mago : combatientes) {
             mago.atacar(rivales);
         }
+    }
+    
+    
+    public void agregarMago() {
+    	PersonajeFactory nuevoMago = new PersonajeFactory();
+    	
+    	combatientes.add(  nuevoMago.crearMago() );
     }
 
     

@@ -5,7 +5,7 @@ import java.util.List;
 
 import unlam.paradigmas.tp2.personajes.mortifagos.Mortifago;
 
-public class batallonMortifagos extends Batallon<Mortifago> {
+public class BatallonMortifagos extends Batallon<Mortifago> {
 
     //ctor aplicado al padre
 

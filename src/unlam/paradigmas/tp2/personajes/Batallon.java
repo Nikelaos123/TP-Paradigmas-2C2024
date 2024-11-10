@@ -15,14 +15,23 @@ public abstract class Batallon<T> {
     }
 
     public void agregar(T combatiente) {
-        combatientes.addLast(combatiente);
+        combatientes.add(combatiente);
     }
-
+    
     public abstract List<T> getBatallon();
 
     public abstract int getVivos();
 
     public abstract void atacarEnGrupo(Batallon rivales);
+
+    public T getCombatiente(int index) {
+        if(index > combatientes.size())
+            throw new RuntimeException("El indice sobresale de la cantidad de combatientes");
+
+        return combatientes.get(index);
+    }
+
+    
 
 
 }
