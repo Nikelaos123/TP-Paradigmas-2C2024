@@ -25,6 +25,8 @@ public abstract class Personaje {
 	protected String nombreHechizoElegido;
 	//private String nombreRivalElegido = new String();
 	protected int combatienteElegidoIndice = 0;
+	private String enemigoElegido;
+
 	
 	public String getNombre() {
 		return nombre;
@@ -70,17 +72,13 @@ public abstract class Personaje {
 	
 	}
 
+	//Implementa Strategy
 	public Optional<Hechizo> elegirHechizo(Batallon obj) {
-		//Implementa Strategy
-
-
 		
 		FileManager fm = new FileManager();
 
-		BatallonMagos b1 = new BatallonMagos();
-		b1.agregar(new PersonajeFactory().crearMago());
 
-		fm.mostrarLogMagos(b1);
+
 
 		//Consulta si tiene el hechizo de curacion y si debe usar hechizo sanacion
 		if( hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Sanacion"))  && fm.decisionCurarse(vida)){
@@ -93,7 +91,7 @@ public abstract class Personaje {
 
 		if(hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Ataque"))){
 			//falta elegir a quien atacar, hay que llamar al fm y ejectuar menosVida
-			
+			this.setEnemigoElegido(fm.decisionAtacar(obj));
 			return hechizos.stream().filter(hec -> hec.getNombre().contains("Ataque")).findFirst();
 		}
 		
@@ -108,6 +106,9 @@ public abstract class Personaje {
 		return null; //A reemplazar
 	}
 
+	private void setEnemigoElegido(String enemigo) {
+		this.enemigoElegido = enemigo;
+	}
 
 	public boolean getVivo() {
 		return vivo;
@@ -118,6 +119,14 @@ public abstract class Personaje {
 		return this.getNombre() + " / HP:  " + this.getVida() + " / MP:" + this.getMana() + " / DEF: " +
 				this.getDefensa() + "/ Hechizos: " + hechizos.size() +
 				" / Estado: " + (this.getVivo()?  "OK" : "Eliminado");
+	}
+
+	public String darReporteCompleto(){
+		return this.getNombre() + " / Puntos de Vida:  " + this.getVida() + 
+				"\n / MP:" + this.getMana() + 
+				"\n / Defensa: " + this.getDefensa() + 
+				"\n / Hechizos Disponibles: " + hechizos.size() +
+				"\n / Estado: " + (this.getVivo()?  "En Combate" : "Fuera de Combate");
 	}
 
 	//retorna true si hay mana suficiente para el mayor coste
@@ -177,6 +186,8 @@ public abstract class Personaje {
 			this.descansar();
 			return;
 		}
+
+		
 		
 		//hechizos.contains(objetivo)  .ejecutar(objetivo);
 

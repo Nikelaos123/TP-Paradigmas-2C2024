@@ -26,8 +26,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		/* 
-		PersonajeFactory pf1 = new PersonajeFactory();
+		
+		/*PersonajeFactory pf1 = new PersonajeFactory();
 		
 		BatallonMagos batallonMagos = new BatallonMagos();
 		BatallonMortifagos batallonMortifagos = new BatallonMortifagos();
@@ -65,26 +65,111 @@ public class Main {
 		hechizoFactoryDefensa.crearHechizo();*/
 
 
-		PersonajeFactory FabricaDePersonajes = new PersonajeFactory();
+		PersonajeFactory fabricaDePersonajes = new PersonajeFactory();
 
 		BatallonMagos batallonMagos = new BatallonMagos();
 		BatallonMortifagos batallonMortigafos = new BatallonMortifagos();
 
+		Batallon batallonGenerico = new BatallonMortifagos();
 		
 		FileManager fm = new FileManager();
 
 		for(int i=0; i <= 5; i++) {
-			batallonMagos.agregar(FabricaDePersonajes.crearMago());
+			batallonMagos.agregar(fabricaDePersonajes.crearMago());
 		}
 
 		for(int i=0; i <= 5; i++) {
-			batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
+			batallonMortigafos.agregar(fabricaDePersonajes.crearMortifago());
 		}
 
-		fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
+		for(int i=0; i <= 5; i++) {
+			batallonGenerico.agregar(fabricaDePersonajes.crearMortifago());
 
-		fm.actualizarFileLogMagos(batallonMagos);
-		fm.actualizarFileLogMortifagos(batallonMortigafos);
+		}
+
+		//fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
+
+		//fm.actualizarFileLogMagos(batallonMagos);
+		//fm.actualizarFileLogMortifagos(batallonMortigafos);
+		//fm.actualizarFileLogGenerico(batallonMagos);
+
+
+		while(batallonMagos.hayVivos() || batallonMortigafos.hayVivos()){
+			batallonMagos.atacarEnGrupo(batallonMortigafos);
+			batallonMortigafos.atacarEnGrupo(batallonMagos);
+		}
+
+		//Quien ganó?
+		if( batallonMagos.hayVivos() ){
+
+			System.out.println("GANARON LOS MAGOS");
+			return;
+		}
+
+
+		if( batallonMortigafos.hayVivos() ){
+
+			System.out.println("GANARON LOS MORTIFAGOS");
+			return;
+		}
+
+		//no tiene que llegar
+		System.out.println("HELP");
+		
+		/*Query q = new Query("consult('"+ "src/main/querys/rivales.pl" +"')");
+		q = new Query("consult('"+ "src/main/querys/consultas.pl" +"')");
+		q = new Query("menosVida(R)");
+
+		System.out.println(q.oneSolution().get("R"));*/
+
+		/*Query q = new Query("consult('" + "src/main/querys/rivales.pl" + "')");
+		if(q.hasSolution()) {
+			System.out.println("Archivo Prolog cargado correctamente.");
+		} else {
+			System.out.println("No se pudo cargar el archivo Prolog.");
+			return;
+		}
+		
+		q = new Query("consult('" + "src/main/querys/consultas.pl" + "')");
+		
+		if(q.hasSolution()) {
+			System.out.println("Archivo Prolog cargado correctamente.");
+		} else {
+			System.out.println("No se pudo cargar el archivo Prolog.");
+			return;
+		}
+
+		q = new Query("menosVida(R)");
+
+		System.out.println(q.oneSolution().get("R"));*/
+
+
+		
+		
+
+		
+		/**/
+		///ACAAAAAAAAAAAAAAAAAAAA
+		//Obtengo datos
+		/**//* 
+
+
+		
+		
+		// Consultar si el hecho "hechizo(expecto_patronum)" es verdadero
+		Query consultaHechizo = new Query("menosVida(R)");
+		
+		Map<String, Term> solution = new HashMap<String,Term>() ;
+		solution = consultaHechizo.oneSolution();
+		System.out.println(solution.get("R"));
+		
+		System.out.println("¿Total?: " + consultaHechizo.allSolutions().length );
+		
+		while (consultaHechizo.hasMoreSolutions()) { // until a good sol is found
+		    
+		    solution = consultaHechizo.nextSolution();
+		    
+		}/*
 		
 
 		/*try {
@@ -108,55 +193,6 @@ public class Main {
 		
 		//String filePath = "C:/Users/Abigail/Downloads/consultas.pl";
 
-/*
-		//Obtengo datos
-		Query q = new Query("consult('" + filePathConocimientos + "')");
-		// Verifica si el archivo se cargó correctamente
-
-		if(q.hasSolution()) {
-			System.out.println("Archivo Prolog cargado correctamente.");
-		} else {
-			System.out.println("No se pudo cargar el archivo Prolog.");
-			return;
-		}
-
-
-		//Obtengo Funciones
-		q = new Query("consult('" + filePathFunciones + "')");
-		// Verifica si el archivo se cargó correctamente
-
-		if(q.hasSolution()) {
-			System.out.println("Archivo Prolog cargado correctamente.");
-		} else {
-			System.out.println("No se pudo cargar el archivo Prolog.");
-			return;
-		}
-
-		q = new Query("menosVida(R)");
-
-
-		while(q.hasMoreSolutions()) {
-			System.out.println(q.nextSolution().get("R"));
-		}
-
-
-		
-		/*
-		// Consultar si el hecho "hechizo(expecto_patronum)" es verdadero
-		Query consultaHechizo = new Query("menosVida(R)");
-		
-		Map<String, Term> solution = new HashMap<String,Term>() ;
-		solution = consultaHechizo.oneSolution();
-		System.out.println(solution.get("R"));
-		
-		System.out.println("¿Total?: " + consultaHechizo.allSolutions().length );
-		
-		while (consultaHechizo.hasMoreSolutions()) { // until a good sol is found
-		    
-		    solution = consultaHechizo.nextSolution();
-		    
-		}*/
-		
 		
 
 		// Consultar si "energia_suficiente(harry_potter)" es verdadero

@@ -31,6 +31,17 @@ public class BatallonMagos extends Batallon<Mago>{
 
         return totalVivos;
     }
+
+    @Override
+    public boolean hayVivos() {
+
+        for (Mago mago : combatientes) {
+            if (mago.getVivo())
+                return true;
+        }
+
+        return false;
+    }
     
     
 

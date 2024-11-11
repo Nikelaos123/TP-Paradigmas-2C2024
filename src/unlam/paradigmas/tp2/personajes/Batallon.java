@@ -25,6 +25,7 @@ public abstract class Batallon<T> {
     }
     
     public abstract int getVivos();
+    public abstract boolean hayVivos();
 
     public abstract void atacarEnGrupo(Batallon<T> rivales);
 

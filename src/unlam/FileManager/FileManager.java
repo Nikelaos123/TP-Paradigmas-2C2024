@@ -20,7 +20,8 @@ public class FileManager {
     //Rutas relativas de archivos de prolog
     private static final String  filePathConocimientosMagos = "src/main/querys/rivalesMagos.pl"; //archivo actualizable por ronda
     private static final String  filePathConocimientosMortifagos = "src/main/querys/rivalesMortifagos.pl"; //archivo actualizable por ronda
-    private static final String filePathFunciones = "src/main/querys/consultas.pl"; //archivo a no modificar
+    private static final String  filePathConocimientosRival = "src/main/querys/rivales.pl"; //archivo actualizable por ronda
+    private static final String  filePathFunciones = "src/main/querys/consultas.pl"; //archivo a no modificar
 
     Query query;
 
@@ -60,7 +61,7 @@ public class FileManager {
         System.out.println("-> Magos");
         
         for (Mago mago : batallonMagos.getBatallon()) {
-            System.out.println(mago.darReporte());
+            System.out.println(mago.darReporteCompleto());
         }
 
     }
@@ -75,9 +76,29 @@ public class FileManager {
         System.out.println("-> Mortigafos");
         
         for (Mortifago mortifago : batallonMortifagos.getBatallon()) {
-            System.out.println(mortifago.darReporte());
+            System.out.println(mortifago.darReporteCompleto());
         }
 
+    }
+
+    public boolean actualizarFileLogGenerico(Batallon<Personaje> batallon) {
+        try {
+			// Crear el archivo Prolog
+			FileWriter logger = new FileWriter(filePathConocimientosRival);
+
+			// Escribir los hechos en el archivo
+			for (Personaje rival : batallon.getBatallon()) {
+				logger.write("rival(" + rival.toPrologStr() + ").\n");
+			}
+
+			logger.close();
+			System.out.println("Archivo '"+ filePathConocimientosRival +"' generado con éxito!");
+
+		} catch (Exception e) {
+			System.out.println("Error al escribir el log. " + e.getMessage());
+            return false;
+		} 
+        return true;
     }
 
     public boolean actualizarFileLogMagos(BatallonMagos batallonMagos) {
@@ -144,6 +165,24 @@ public class FileManager {
 
     //FALTA CREAR METODO LLAMADANDO A LA FUNCION DE PROLOG DE MENORVIDA
 
+    public String decisionAtacar(Batallon batallonEnemigo) {
+
+        this.actualizarFileLogGenerico(batallonEnemigo);
+
+        query = new Query("consult('"+ filePathConocimientosRival +"')");
+
+        if(query.hasSolution()) {
+			System.out.println("Archivo Prolog cargado correctamente.");
+		} else {
+			System.out.println("No se pudo cargar el archivo Prolog.");
+			throw new RuntimeException("Error al abrir el archivo de rivales");
+		}
+
+        query = new Query("menosVida(R)");
+
+        
+        return  query.oneSolution().get("R").toString();
+    }
     
     
 
