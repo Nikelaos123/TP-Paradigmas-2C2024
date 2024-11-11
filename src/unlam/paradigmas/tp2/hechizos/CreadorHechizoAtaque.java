@@ -1,19 +1,35 @@
-/*
-
-NO PORQUE NO ME DEJA INSTANCIAR HECHIZOSANACION PORQUE COMO HECHIZO ES 
-UNA INTERFAZ NO PUEDO LLEGAR A LOS ATRIBUTOS DE LAS CLASES CONCRETAS 
-HECHIZOATAQUE, HECHIZODEFENSA, ETC
-
 package unlam.paradigmas.tp2.hechizos;
 
-public class CreadorHechizoSanacion extends HechizoFactory{
+public class CreadorHechizoAtaque extends HechizoFactory{
 	
-	@Override
-	public Hechizo crearHechizo(String nombre, int costo, int poder) {
+	//Niveles de Ataque:
+	//Debil: 25 / 75
+	//Comun: 30 / 125 -> Default
+	//Fuerte: 35 / 200
 
-		return new HechizoSanacion(nombre, costo, poder);
+	@Override
+	public Hechizo crearHechizo() {
+
+		//Generar numero aleatorio (1 al 3) para definir nivel del hechizo
+        int numeroAleatorio = RANDOM.nextInt(3) + 1; 
+
+		switch (numeroAleatorio) {
+			case 1:
+				//System.out.println("Se creó un hechizo de Ataque Debil");
+				return new HechizoAtaque("Ataque - Debil", 25, 75);
+
+			case 2:
+				//System.out.println("Se creó un hechizo de Ataque Comun");
+				return new HechizoAtaque("Ataque - Comun", 30, 125);
+
+			case 3:
+				//System.out.println("Se creó un hechizo de Ataque Fuerte!");
+				return new HechizoAtaque("Ataque - Fuerte", 35, 200);
+		}
+
+		//En caso de error, se retorna un Hechizo Comun
+		return new HechizoAtaque();
 	}
 
 }
 
-*/

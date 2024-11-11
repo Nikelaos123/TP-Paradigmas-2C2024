@@ -4,8 +4,12 @@ import java.util.Random;
 
 public abstract class HechizoFactory {
 
-	private static final Random RANDOM = new Random();
+	protected static final Random RANDOM = new Random();
 
+	public abstract Hechizo crearHechizo();
+	
+
+	/* //No se debería implementar, solo definir
 	public Hechizo crearHechizo(String nombre, int costo, int poder) {
 
 		int valorAleatorio = RANDOM.nextInt(HechizosEnum.obtenerCantidadValores());
@@ -23,6 +27,6 @@ public abstract class HechizoFactory {
             throw new IllegalArgumentException("Hechizo desconocido");
 		}
 		
-	}
+	}*/
 
 }

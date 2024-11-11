@@ -4,9 +4,12 @@ import unlam.paradigmas.tp2.personajes.Personaje;
 
 public interface Hechizo {
 	
-	public int ejecutar(Personaje objetivo, int manaActualPersonaje);
+	public void ejecutar(Personaje objetivo);
 	
-	// RARO
+	public String getNombre();
+	public double getPoder();
+	public double getCosto();
+	// RARO -> para nada
 	/*
 	public Hechizo getCosto();
 	public Hechizo getPoder();
