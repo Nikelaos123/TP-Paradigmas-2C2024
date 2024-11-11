@@ -1,6 +1,6 @@
 package unlam.paradigmas.tp2.personajes;
 
-import unlam.FileManager.FileManager;
+import unlam.paradigmas.tp2.FileManager.FileManager;
 import unlam.paradigmas.tp2.hechizos.CreadorHechizoAtaque;
 import unlam.paradigmas.tp2.hechizos.Hechizo;
 

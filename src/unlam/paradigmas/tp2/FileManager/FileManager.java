@@ -1,4 +1,4 @@
-package unlam.FileManager;
+package unlam.paradigmas.tp2.FileManager;
 
 import java.io.FileWriter;
 
