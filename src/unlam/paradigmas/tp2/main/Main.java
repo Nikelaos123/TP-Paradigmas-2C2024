@@ -1,4 +1,4 @@
-package main;
+package unlam.paradigmas.tp2.main;
 
 import java.io.FileWriter;
 import java.io.IOException;
