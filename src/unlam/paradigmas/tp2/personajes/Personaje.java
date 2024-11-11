@@ -1,10 +1,12 @@
 package unlam.paradigmas.tp2.personajes;
 
 import unlam.FileManager.FileManager;
+import unlam.paradigmas.tp2.hechizos.CreadorHechizoAtaque;
 import unlam.paradigmas.tp2.hechizos.Hechizo;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 
 public abstract class Personaje {
@@ -68,16 +70,42 @@ public abstract class Personaje {
 	
 	}
 
-	public Hechizo elegirHechizo(Batallon obj) {
+	public Optional<Hechizo> elegirHechizo(Batallon obj) {
 		//Implementa Strategy
+
+
 		
 		FileManager fm = new FileManager();
 
+		BatallonMagos b1 = new BatallonMagos();
+		b1.agregar(new PersonajeFactory().crearMago());
+
+		fm.mostrarLogMagos(b1);
+
 		//Consulta si tiene el hechizo de curacion y si debe usar hechizo sanacion
+		if( hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Sanacion"))  && fm.decisionCurarse(vida)){
+			return hechizos.stream().filter(hec -> hec.getNombre().contains("Sanacion")).findFirst();
+		}
+
+		if(hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Defensa")) && fm.decisionDefenderse(this.defensa)) {
+			return hechizos.stream().filter(hec -> hec.getNombre().contains("Defensa")).findFirst();
+		}
+
+		if(hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Ataque"))){
+			//falta elegir a quien atacar, hay que llamar al fm y ejectuar menosVida
+			
+			return hechizos.stream().filter(hec -> hec.getNombre().contains("Ataque")).findFirst();
+		}
+		
+
+
+		//verificar que hay hechizos
+		if(hechizos.size() == 0)
+			hechizos.add(new CreadorHechizoAtaque().crearHechizo()); //invoca un nuevo hechizo
+
 		
 		
-		
-		return hechizos.get(0); //A reemplazar
+		return null; //A reemplazar
 	}
 
 
@@ -92,16 +120,17 @@ public abstract class Personaje {
 				" / Estado: " + (this.getVivo()?  "OK" : "Eliminado");
 	}
 
-	//retorna true si hay mana suficiente
+	//retorna true si hay mana suficiente para el mayor coste
 	public boolean verificarMana(){
-		double minMana = Double.MAX_VALUE;
+
+		double maxManaRequerido = 0;
  
 		for (Hechizo hechizo : hechizos) {
-			if( hechizo.getCosto() < minMana)
-				minMana = hechizo.getCosto();
+			if( hechizo.getCosto() > maxManaRequerido)
+			maxManaRequerido = hechizo.getCosto();
 		}
 
-		return mana >= minMana;
+		return mana >= maxManaRequerido;
 	}
 	
 	public void descansar() {
@@ -109,6 +138,7 @@ public abstract class Personaje {
 	}
 
 	public boolean atacar(Batallon obj) {
+
 		if(!this.vivo)
 			return false;
 
@@ -117,6 +147,7 @@ public abstract class Personaje {
 			this.descansar();
 			return false;
 		}
+
 
 		
 		this.lanzarHechizo(elegirHechizo(obj), (Personaje)obj.getCombatiente(this.combatienteElegidoIndice));
@@ -140,13 +171,17 @@ public abstract class Personaje {
 
 	
 
-	public void lanzarHechizo(Hechizo hechizo, Personaje objetivo) {
+	public void lanzarHechizo(Optional<Hechizo>  hechizo, Personaje objetivo) {
 		
-		// QUE PASA CUANDO UN PERSONAJE SE QUEDA SIN MANA??? LISTO
-		// Y SI SE QUEDAN TODOS SIN MANA???????????????????????? UN BAJON
-		// RTA: LO TIENE QUE RESOLVER HECHIZO, nop descansan
+		if(hechizo == null){
+			this.descansar();
+			return;
+		}
 		
-		this.mana -= hechizo.ejecutar(objetivo, this.mana);
+		//hechizos.contains(objetivo)  .ejecutar(objetivo);
+
+		mana -= hechizos.getFirst().getCosto();
+
 	}
 
 	

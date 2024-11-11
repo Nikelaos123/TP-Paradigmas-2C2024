@@ -27,11 +27,9 @@ public class HechizoDefensa implements Hechizo{
 		this.poder = poder;
 	}
 	
-	public double ejecutar(Personaje objetivo, double manaActualPersonaje) {
-		return 0;
-		
+	public void ejecutar(Personaje objetivo) {
+		objetivo.recibirDefensa(poder);
 	}
-
 
 	@Override
 	public String getNombre() {

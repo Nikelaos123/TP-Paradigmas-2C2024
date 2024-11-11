@@ -4,7 +4,7 @@ import unlam.paradigmas.tp2.personajes.Personaje;
 
 public interface Hechizo {
 	
-	public double ejecutar(Personaje objetivo, double manaActualPersonaje);
+	public void ejecutar(Personaje objetivo);
 	
 	public String getNombre();
 	public double getPoder();

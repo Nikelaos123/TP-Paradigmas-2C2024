@@ -70,18 +70,21 @@ public class Main {
 		BatallonMagos batallonMagos = new BatallonMagos();
 		BatallonMortifagos batallonMortigafos = new BatallonMortifagos();
 
-		batallonMagos.agregar(FabricaDePersonajes.crearMago());
-		batallonMagos.agregar(FabricaDePersonajes.crearMago());
-		batallonMagos.agregar(FabricaDePersonajes.crearMago());
-		batallonMagos.agregar(FabricaDePersonajes.crearMago());
-
-		batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
-		batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
-		batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
-		batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
-
+		
 		FileManager fm = new FileManager();
+
+		for(int i=0; i <= 5; i++) {
+			batallonMagos.agregar(FabricaDePersonajes.crearMago());
+		}
+
+		for(int i=0; i <= 5; i++) {
+			batallonMortigafos.agregar(FabricaDePersonajes.crearMortifago());
+		}
+
 		fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
+
+		fm.actualizarFileLogMagos(batallonMagos);
+		fm.actualizarFileLogMortifagos(batallonMortigafos);
 		
 
 		/*try {

@@ -23,19 +23,17 @@ public class PersonajeFactory {
 		int randNombre = RANDOM.nextInt(nombres.length);	
 
 
-
-
 		switch (randTipo) {
 			case 1:
-				System.out.println("Se creó a " + nombres[randNombre] +"! Un Mago de tipo Estudiante");
+				//System.out.println("Se creó a " + nombres[randNombre] +"! Un Mago de tipo Estudiante");
 				return new Estudiante(nombres[randNombre]);
 
 			case 2:
-				System.out.println("Se creó  a " + nombres[randNombre] +"! Un Mago de tipo Profesor");
+				//System.out.println("Se creó  a " + nombres[randNombre] +"! Un Mago de tipo Profesor");
 				return new Profesor(nombres[randNombre]);
 
 			case 3:
-				System.out.println("Se creó  a " + nombres[randNombre] +"! Un Mago  de tipo Auror");
+				//System.out.println("Se creó  a " + nombres[randNombre] +"! Un Mago  de tipo Auror");
 				return new Auror(nombres[randNombre]);
 		}
 
@@ -53,11 +51,11 @@ public class PersonajeFactory {
 
 		switch (randTipo) {
 			case 1:
-				System.out.println("Se creó un Mortifago de tipo Seguidor");
+				//System.out.println("Se creó un Mortifago de tipo Seguidor");
 				return new Seguidor(nombres[randNombre]);
 
 			case 2:
-			System.out.println("Se creó un Mortifago de tipo Comandante");
+				//System.out.println("Se creó un Mortifago de tipo Comandante");
 				return new Comandante(nombres[randNombre]);
 
 		}

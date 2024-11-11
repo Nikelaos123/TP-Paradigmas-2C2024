@@ -7,6 +7,7 @@ public abstract class HechizoFactory {
 	protected static final Random RANDOM = new Random();
 
 	public abstract Hechizo crearHechizo();
+	
 
 	/* //No se debería implementar, solo definir
 	public Hechizo crearHechizo(String nombre, int costo, int poder) {

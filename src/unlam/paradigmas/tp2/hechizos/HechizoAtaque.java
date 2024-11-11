@@ -49,8 +49,9 @@ public class HechizoAtaque implements Hechizo{
 	}
 	*/
 	
-	public double ejecutar(Personaje objetivo, double manaActualPersonaje) {
-		return 0;
+	public void ejecutar(Personaje objetivo) {
+		
+		objetivo.recibirAtaque(this.poder);
 		
 	}
 

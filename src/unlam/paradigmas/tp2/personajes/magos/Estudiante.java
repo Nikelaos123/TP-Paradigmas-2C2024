@@ -4,10 +4,12 @@ import unlam.paradigmas.tp2.hechizos.CreadorHechizoAtaque;
 
 public class Estudiante extends Mago{
 
+	
+
     public Estudiante(String nombre) {
 		super(nombre);
-		this.potenciadorLeal = 1.2;
-		this.mana *= potenciadorLeal;
+		this.potenciadorLealtad = 1.2;
+		this.mana *= potenciadorLealtad;
 		this.hechizos.add(new CreadorHechizoAtaque().crearHechizo());
 	}
 

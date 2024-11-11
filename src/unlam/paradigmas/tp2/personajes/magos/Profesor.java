@@ -7,9 +7,9 @@ public class Profesor extends Mago{
     
     public Profesor(String nombre) {
 		super(nombre);
-		this.potenciadorLeal = 1.4;
-		this.mana *= potenciadorLeal;
-		this.defensa *= potenciadorLeal;
+		this.potenciadorLealtad = 1.4;
+		this.mana *= potenciadorLealtad;
+		this.defensa *= potenciadorLealtad;
 		this.hechizos.add(new CreadorHechizoAtaque().crearHechizo());
 		this.hechizos.add(new CreadorHechizoDefensa().crearHechizo());
 	}

@@ -25,12 +25,11 @@ public class FileManager {
     Query query;
 
     public FileManager() {
-        //this.query = new Query("consult('" + filePathFunciones + "')");
 
         //Obtengo Funciones
         Query q = new Query("consult('" + filePathFunciones + "')");
-        // Verifica si el archivo se cargó correctamente
 
+        // Verifica si el archivo se cargó correctamente
         if(q.hasSolution()) {
             //System.out.println("Archivo Prolog cargado correctamente.");
         } else {
@@ -92,7 +91,7 @@ public class FileManager {
 			}
 
 			logger.close();
-			System.out.println("Archivo generado con éxito!");
+			System.out.println("Archivo '"+ filePathConocimientosMagos +"' generado con éxito!");
 
 		} catch (Exception e) {
 			System.out.println("Error al escribir el log. " + e.getMessage());
@@ -112,7 +111,7 @@ public class FileManager {
 			}
 
 			logger.close();
-			System.out.println("Archivo generado con éxito!");
+			System.out.println("Archivo '"+ filePathConocimientosMortifagos +"' generado con éxito!");
 
 		} catch (Exception e) {
 			System.out.println("Error al escribir el log. " + e.getMessage());
@@ -121,6 +120,8 @@ public class FileManager {
         return true;
     }
 
+
+    // - - - - - - - - - - Decisiones - - - - - - - - - - 
     public boolean decisionCurarse( double puntosVida )  {
 
         //Realiza la consulta segun parametro
@@ -140,6 +141,8 @@ public class FileManager {
         return query.hasSolution();
 
     }
+
+    //FALTA CREAR METODO LLAMADANDO A LA FUNCION DE PROLOG DE MENORVIDA
 
     
     

@@ -17,15 +17,15 @@ public class CreadorHechizoSanacion extends HechizoFactory{
 
 		switch (numeroAleatorio) {
 			case 1:
-				System.out.println("Se creó un hechizo de Sanación Debil");
+				//System.out.println("Se creó un hechizo de Sanación Debil");
 				return new HechizoSanacion("Sanacion - Debil", 25, 50);
 
 			case 2:
-				System.out.println("Se creó un hechizo de Sanación Comun");
+				//System.out.println("Se creó un hechizo de Sanación Comun");
 				return new HechizoSanacion("Sanacion - Comun", 30, 100);
 
 			case 3:
-				System.out.println("Se creó un hechizo de Sanación Fuerte!");
+				//System.out.println("Se creó un hechizo de Sanación Fuerte!");
 				return new HechizoSanacion("Sanacion - Fuerte", 35, 150);
 		}
 
