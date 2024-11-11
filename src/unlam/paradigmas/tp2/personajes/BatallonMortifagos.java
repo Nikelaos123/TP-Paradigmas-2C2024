@@ -1,22 +1,21 @@
 package unlam.paradigmas.tp2.personajes;
 
-import java.util.List;
+import java.util.Set;
 
 import unlam.paradigmas.tp2.personajes.magos.Mago;
 import unlam.paradigmas.tp2.personajes.mortifagos.Mortifago;
 
 public class BatallonMortifagos extends Batallon<Mortifago> {
 
-    //ctor aplicado al padre
-
+    // ctor aplicado al padre
 
     @Override
-    public List<Mortifago> getBatallon() {
+    public Set<Mortifago> getBatallon() {
         return combatientes;
     }
 
-    //Igual al de arriba, posible eliminación
-    public List<Mortifago> getMortifagos(){
+    // Igual al de arriba, posible eliminación
+    public Set<Mortifago> getMortifagos() {
         return combatientes;
     }
 
@@ -45,12 +44,18 @@ public class BatallonMortifagos extends Batallon<Mortifago> {
 
     @Override
     public void atacarEnGrupo(Batallon rivales) {
-        if(getVivos() == 0)
-            return; //Se podría agregar un mensaje
+        if (getVivos() == 0)
+            return; // Se podría agregar un mensaje
 
         for (Mortifago mortifago : combatientes) {
             mortifago.atacar(rivales);
         }
     }
-    
+
+    public void agregar() {
+        while (combatientes.size() < this.cantidadCombatientes) {
+            combatientes.add(new PersonajeFactory().crearMortifago());
+        }
+    }
+
 }

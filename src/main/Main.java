@@ -65,6 +65,8 @@ public class Main {
 		hechizoFactoryDefensa.crearHechizo();*/
 
 
+
+
 		PersonajeFactory fabricaDePersonajes = new PersonajeFactory();
 
 		BatallonMagos batallonMagos = new BatallonMagos();
@@ -74,15 +76,15 @@ public class Main {
 		
 		FileManager fm = new FileManager();
 
-		for(int i=0; i <= 5; i++) {
-			batallonMagos.agregar(fabricaDePersonajes.crearMago());
-		}
+		batallonMagos.agregar();
+
+		
+		batallonMortigafos.agregar(fabricaDePersonajes.crearMortifago());
+		
 
 		for(int i=0; i <= 5; i++) {
-			batallonMortigafos.agregar(fabricaDePersonajes.crearMortifago());
-		}
+			
 
-		for(int i=0; i <= 5; i++) {
 			batallonGenerico.agregar(fabricaDePersonajes.crearMortifago());
 
 		}

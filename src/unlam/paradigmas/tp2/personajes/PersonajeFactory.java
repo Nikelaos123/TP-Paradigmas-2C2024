@@ -21,7 +21,7 @@ public class PersonajeFactory {
 		//Generar numero aleatorio (1 al 3) para definir nivel del hechizo
         int randTipo = RANDOM.nextInt(3) + 1; 
 		int randNombre = RANDOM.nextInt(nombres.length);	
-
+		
 
 		switch (randTipo) {
 			case 1:

@@ -7,7 +7,6 @@ import org.jpl7.Query;
 import org.jpl7.Term;
 import org.jpl7.Variable;
 
-
 import unlam.paradigmas.tp2.personajes.Personaje;
 import unlam.paradigmas.tp2.personajes.Batallon;
 import unlam.paradigmas.tp2.personajes.magos.Mago;
@@ -17,22 +16,24 @@ import unlam.paradigmas.tp2.personajes.BatallonMortifagos;
 
 public class FileManager {
 
-    //Rutas relativas de archivos de prolog
-    private static final String  filePathConocimientosMagos = "src/main/querys/rivalesMagos.pl"; //archivo actualizable por ronda
-    private static final String  filePathConocimientosMortifagos = "src/main/querys/rivalesMortifagos.pl"; //archivo actualizable por ronda
-    private static final String  filePathConocimientosRival = "src/main/querys/rivales.pl"; //archivo actualizable por ronda
-    private static final String  filePathFunciones = "src/main/querys/consultas.pl"; //archivo a no modificar
+    // Rutas relativas de archivos de prolog
+    // private static final String filePathConocimientosMagos =
+    // "src/main/querys/rivalesMagos.pl"; //archivo actualizable por ronda
+    // private static final String filePathConocimientosMortifagos =
+    // "src/main/querys/rivalesMortifagos.pl"; //archivo actualizable por ronda
+    private static final String FILEPATH_RIVALES = "src/main/querys/rivales.pl"; // archivo actualizable por ronda
+    private static final String FILEPATH_FUNCIONES = "src/main/querys/consultas.pl"; // archivo a no modificar
 
-    Query query;
+    private Query query;
 
     public FileManager() {
 
-        //Obtengo Funciones
-        Query q = new Query("consult('" + filePathFunciones + "')");
+        // Obtengo Funciones
+        Query q = new Query("consult('" + FILEPATH_FUNCIONES + "')");
 
         // Verifica si el archivo se cargó correctamente
-        if(q.hasSolution()) {
-            //System.out.println("Archivo Prolog cargado correctamente.");
+        if (q.hasSolution()) {
+            // System.out.println("Archivo Prolog cargado correctamente.");
         } else {
             System.out.println("No se pudo cargar el archivo Prolog.");
         }
@@ -40,7 +41,6 @@ public class FileManager {
 
     public void mostrarLogCompleto(BatallonMagos batallonMagos, BatallonMortifagos batallonMortifagos) {
 
-        
         System.out.println("- - - - Reporte completo - - - - ");
 
         this.mostrarLogMagos(batallonMagos);
@@ -53,13 +53,13 @@ public class FileManager {
 
     public void mostrarLogMagos(BatallonMagos batallonMagos) {
 
-        if(batallonMagos == null || batallonMagos.getTotalCombatientes() == 0) {
+        if (batallonMagos == null || batallonMagos.getTotalCombatientes() == 0) {
             System.out.println("-> No hay magos");
             return;
         }
 
         System.out.println("-> Magos");
-        
+
         for (Mago mago : batallonMagos.getBatallon()) {
             System.out.println(mago.darReporteCompleto());
         }
@@ -68,13 +68,13 @@ public class FileManager {
 
     public void mostrarLogMortifagos(BatallonMortifagos batallonMortifagos) {
 
-        if(batallonMortifagos == null || batallonMortifagos.getTotalCombatientes() == 0) {
+        if (batallonMortifagos == null || batallonMortifagos.getTotalCombatientes() == 0) {
             System.out.println("-> No hay Mortifagos");
             return;
         }
 
         System.out.println("-> Mortigafos");
-        
+
         for (Mortifago mortifago : batallonMortifagos.getBatallon()) {
             System.out.println(mortifago.darReporteCompleto());
         }
@@ -83,123 +83,124 @@ public class FileManager {
 
     public boolean actualizarFileLogGenerico(Batallon<Personaje> batallon) {
         try {
-			// Crear el archivo Prolog
-			FileWriter logger = new FileWriter(filePathConocimientosRival);
+            // Crear el archivo Prolog
+            FileWriter logger = new FileWriter(FILEPATH_RIVALES);
 
-			// Escribir los hechos en el archivo
-			for (Personaje rival : batallon.getBatallon()) {
-				logger.write("rival(" + rival.toPrologStr() + ").\n");
-			}
+            // Escribir los hechos en el archivo
+            for (Personaje rival : batallon.getBatallon()) {
+                logger.write("rival(" + rival.toPrologStr() + ").\n");
+            }
 
-			logger.close();
-			System.out.println("Archivo '"+ filePathConocimientosRival +"' generado con éxito!");
+            logger.close();
+            System.out.println("Archivo '" + FILEPATH_RIVALES + "' generado con éxito!");
 
-		} catch (Exception e) {
-			System.out.println("Error al escribir el log. " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error al escribir el log. " + e.getMessage());
             return false;
-		} 
+        }
         return true;
     }
+    /*
+     * public boolean actualizarFileLogMagos(BatallonMagos batallonMagos) {
+     * try {
+     * // Crear el archivo Prolog
+     * FileWriter logger = new FileWriter(filePathConocimientosMagos);
+     * 
+     * // Escribir los hechos en el archivo
+     * for (Mago mago : batallonMagos.getBatallon()) {
+     * logger.write("rival(" + mago.toPrologStr() + ").\n");
+     * }
+     * 
+     * logger.close();
+     * System.out.println("Archivo '"+ filePathConocimientosMagos
+     * +"' generado con éxito!");
+     * 
+     * } catch (Exception e) {
+     * System.out.println("Error al escribir el log. " + e.getMessage());
+     * return false;
+     * }
+     * return true;
+     * }
+     * 
+     * public boolean actualizarFileLogMortifagos(BatallonMortifagos
+     * batallonMortifagos) {
+     * try {
+     * // Crear el archivo Prolog
+     * FileWriter logger = new FileWriter(filePathConocimientosMortifagos);
+     * 
+     * // Escribir los hechos en el archivo
+     * for (Mortifago mortifago : batallonMortifagos.getBatallon()) {
+     * logger.write("rival(" + mortifago.toPrologStr() + ").\n");
+     * }
+     * 
+     * logger.close();
+     * System.out.println("Archivo '"+ filePathConocimientosMortifagos
+     * +"' generado con éxito!");
+     * 
+     * } catch (Exception e) {
+     * System.out.println("Error al escribir el log. " + e.getMessage());
+     * return false;
+     * }
+     * return true;
+     * }
+     */
 
-    public boolean actualizarFileLogMagos(BatallonMagos batallonMagos) {
-        try {
-			// Crear el archivo Prolog
-			FileWriter logger = new FileWriter(filePathConocimientosMagos);
+    // - - - - - - - - - - Decisiones - - - - - - - - - -
+    public boolean decisionCurarse(double puntosVida) {
 
-			// Escribir los hechos en el archivo
-			for (Mago mago : batallonMagos.getBatallon()) {
-				logger.write("rival(" + mago.toPrologStr() + ").\n");
-			}
-
-			logger.close();
-			System.out.println("Archivo '"+ filePathConocimientosMagos +"' generado con éxito!");
-
-		} catch (Exception e) {
-			System.out.println("Error al escribir el log. " + e.getMessage());
-            return false;
-		} 
-        return true;
-    }
-
-    public boolean actualizarFileLogMortifagos(BatallonMortifagos batallonMortifagos) {
-        try {
-			// Crear el archivo Prolog
-			FileWriter logger = new FileWriter(filePathConocimientosMortifagos);
-
-			// Escribir los hechos en el archivo
-			for (Mortifago mortifago : batallonMortifagos.getBatallon()) {
-				logger.write("rival(" + mortifago.toPrologStr() + ").\n");
-			}
-
-			logger.close();
-			System.out.println("Archivo '"+ filePathConocimientosMortifagos +"' generado con éxito!");
-
-		} catch (Exception e) {
-			System.out.println("Error al escribir el log. " + e.getMessage());
-            return false;
-		} 
-        return true;
-    }
-
-
-    // - - - - - - - - - - Decisiones - - - - - - - - - - 
-    public boolean decisionCurarse( double puntosVida )  {
-
-        //Realiza la consulta segun parametro
-        query = new Query("curarse("+ puntosVida +")");
-        //System.out.println("Se debe curar? " + query.hasSolution() );
+        // Realiza la consulta segun parametro
+        query = new Query("curarse(" + puntosVida + ")");
+        // System.out.println("Se debe curar? " + query.hasSolution() );
 
         return query.hasSolution();
 
     }
 
-    public boolean decisionDefenderse( double puntosDefensa )  {
+    public boolean decisionDefenderse(double puntosDefensa) {
 
-        //Realiza la consulta segun parametro
-        query = new Query("defenderse("+ puntosDefensa +")");
-        //System.out.println("Se debe defender? " + query.hasSolution() );
+        // Realiza la consulta segun parametro
+        query = new Query("defenderse(" + puntosDefensa + ")");
+        // System.out.println("Se debe defender? " + query.hasSolution() );
 
         return query.hasSolution();
 
     }
 
-    //FALTA CREAR METODO LLAMADANDO A LA FUNCION DE PROLOG DE MENORVIDA
-
+    // FALTA CREAR METODO LLAMADANDO A LA FUNCION DE PROLOG DE MENORVIDA
     public String decisionAtacar(Batallon batallonEnemigo) {
 
         this.actualizarFileLogGenerico(batallonEnemigo);
 
-        query = new Query("consult('"+ filePathConocimientosRival +"')");
+        query = new Query("consult('" + FILEPATH_RIVALES + "')");
 
-        if(query.hasSolution()) {
-			System.out.println("Archivo Prolog cargado correctamente.");
-		} else {
-			System.out.println("No se pudo cargar el archivo Prolog.");
-			throw new RuntimeException("Error al abrir el archivo de rivales");
-		}
+        if (query.hasSolution()) {
+            System.out.println("Archivo Prolog cargado correctamente.");
+        } else {
+            System.out.println("No se pudo cargar el archivo Prolog.");
+            throw new RuntimeException("Error al abrir el archivo de rivales");
+        }
 
         query = new Query("menosVida(R)");
 
-        
-        return  query.oneSolution().get("R").toString();
+        return query.oneSolution().get("R").toString();
     }
-    
-    
 
-    /*try {
-			// Crear el archivo Prolog
-			FileWriter logger = new FileWriter("src/main/querys/rivales.pl");
-
-			// Escribir los hechos en el archivo
-			for (Mago mago : batallonMagos.getBatallon()) {
-				logger.write("rival(" + mago.toPrologStr() + ").\n");
-			}
-
-			logger.close();
-			System.out.println("Archivo generado con éxito!");
-
-		} catch (Exception e) {
-			System.out.println("Error al escribir el log.");
-			e.printStackTrace();
-		} */
+    /*
+     * try {
+     * // Crear el archivo Prolog
+     * FileWriter logger = new FileWriter("src/main/querys/rivales.pl");
+     * 
+     * // Escribir los hechos en el archivo
+     * for (Mago mago : batallonMagos.getBatallon()) {
+     * logger.write("rival(" + mago.toPrologStr() + ").\n");
+     * }
+     * 
+     * logger.close();
+     * System.out.println("Archivo generado con éxito!");
+     * 
+     * } catch (Exception e) {
+     * System.out.println("Error al escribir el log.");
+     * e.printStackTrace();
+     * }
+     */
 }
