@@ -181,7 +181,6 @@ public abstract class Personaje {
 		//hechizos.contains(objetivo)  .ejecutar(objetivo);
 
 		mana -= hechizos.getFirst().getCosto();
-
 	}
 
 	
