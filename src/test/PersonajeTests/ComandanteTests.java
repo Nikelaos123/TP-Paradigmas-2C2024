@@ -1,4 +1,4 @@
-package test;
+package test.PersonajeTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,12 +20,12 @@ class ComandanteTests {
 	}
 	
 	@Test
-	void puedeCrear() {
+	public void puedeCrear() {
 		assertNotNull(personaje);
 	}
 	
 	@Test
-	void getters() {
+	public void getters() {
 		assertNotNull(personaje.getNombre());
 		assertNotNull(personaje.getMana());
 		assertNotNull(personaje.getVida());
@@ -34,20 +34,20 @@ class ComandanteTests {
 	}
 	
 	@Test
-	void reportarse() {
+	public void reportarse() {
 		assertNotNull(personaje.darReporteCompleto());
 		
 	} 
 	
 	@Test
-	void igualarse() {
+	public void igualarse() {
 		assertEquals(personaje, new Comandante("Raul"));
 		assertNotEquals(personaje, new Comandante("José"));
 	}
 	
 	//Aplica tambien para recibirAtaque
 	@Test
-	void verificarMuerte() {
+	public void verificarMuerte() {
 		personaje.recibirAtaque(Double.MAX_VALUE);
 		assertFalse(personaje.getVivo());
 		
@@ -57,7 +57,7 @@ class ComandanteTests {
 	}
 	
 	@Test
-	void noAtacarSinEnemigos() {
+	public void noAtacarSinEnemigos() {
 		Batallon batallonEnemigo = new BatallonMortifagos();
 		
 		assertFalse(personaje.atacar(batallonEnemigo));
@@ -65,21 +65,21 @@ class ComandanteTests {
 	
 	//Aplica tambien a recibirMana()
 	@Test
-	void descanso() {
+	public void descanso() {
 		double manaAnterior = personaje.getMana();
 		personaje.descansar();
 		assertTrue(manaAnterior < personaje.getMana());
 	}
 	
 	@Test  
-	void recibirDefensa() {
+	public void recibirDefensa() {
 		double defensaAnterior = personaje.getDefensa();
 		personaje.recibirDefensa(50);
 		assertTrue(defensaAnterior < personaje.getDefensa());
 	}
 	
 	@Test  
-	void recibirVida() {
+	public void recibirVida() {
 		double vidaAnterior = personaje.getVida();
 		personaje.recibirSanacion(50);
 		assertTrue(vidaAnterior < personaje.getVida());

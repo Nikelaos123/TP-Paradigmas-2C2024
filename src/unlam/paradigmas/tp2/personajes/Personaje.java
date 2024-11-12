@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BooleanSupplier;
 
 public abstract class Personaje {
 
@@ -94,6 +95,10 @@ public abstract class Personaje {
 
 	public boolean getVivo() {
 		return vivo;
+	}
+	
+	public int getCantidadHechizos() {
+		return hechizos.size();
 	}
 
 	// retorna true si hay mana suficiente para el mayor coste
@@ -276,10 +281,10 @@ public abstract class Personaje {
 			} else {
 				double restaDanio = danio - this.getDefensa();
 				this.restarDefensa(this.getDefensa());
-				System.out.print("El Personaje " + this.getNombre() + " ha perdido su defensa!");
+				System.out.print("El Personaje " + this.getNombre() + " ha perdido su defensa! ");
 				this.restarVida(restaDanio);
 				System.out.println("El Personaje " + this.getNombre() + " ha sufrido daño! Queda con "
-						+ this.getVida() + " puntos de Vida!");
+						+ this.getVida() + " puntos de Vida! ");
 			}
 		} else {
 			this.restarVida(danio);
@@ -313,4 +318,6 @@ public abstract class Personaje {
 	public int hashCode() {
 		return Objects.hash(nombre);
 	}
+
+	
 }
