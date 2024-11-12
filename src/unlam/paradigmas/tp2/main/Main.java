@@ -77,6 +77,8 @@ public class Main {
 			if (batallonMortigafos.hayVivos())
 				batallonMortigafos.atacarEnGrupo(batallonMagos);
 
+			fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
+
 		}
 
 		System.out.println("-------------------------->>YESSSSSSS");

@@ -1,5 +1,5 @@
-rival(salakar, 0, 0).
-rival(ravok, 0, 0).
-rival(astarot, 0, 0).
-rival(vorgar, 0, 0).
-rival(veromos, 100, 0).
+rival(aquamaris, 0, 0).
+rival(ignis, 0, 0).
+rival(bernard, 80, 0).
+rival(lyra, 0, 0).
+rival(luna, 0, 0).

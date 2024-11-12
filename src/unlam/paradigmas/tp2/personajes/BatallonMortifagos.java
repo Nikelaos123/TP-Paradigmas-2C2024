@@ -64,7 +64,7 @@ public class BatallonMortifagos extends Batallon<Mortifago> {
     @Override
     public Mortifago getCombatiente(String nombre) {
         for (Mortifago mortifago : combatientes) {
-            if (mortifago.getNombre().toLowerCase().equals(nombre))
+            if (mortifago.getVivo() && mortifago.getNombre().toLowerCase().equals(nombre))
                 return mortifago;
         }
 

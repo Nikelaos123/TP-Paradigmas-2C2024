@@ -64,7 +64,7 @@ public class BatallonMagos extends Batallon<Mago> {
     @Override
     public Mago getCombatiente(String nombre) {
         for (Mago mago : combatientes) {
-            if (mago.getNombre().toLowerCase().equals(nombre))
+            if (mago.getVivo() && mago.getNombre().toLowerCase().equals(nombre))
                 return mago;
         }
 

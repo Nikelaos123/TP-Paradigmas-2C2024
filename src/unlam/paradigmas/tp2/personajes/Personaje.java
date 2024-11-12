@@ -136,14 +136,14 @@ public abstract class Personaje {
 
 		// Consulta si tiene el hechizo de ataque y a quien atacar
 		if (hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Ataque"))) {
-			// falta elegir a quien atacar, hay que llamar al fm y ejectuar menosVida
+
 			this.setEnemigoElegido(fileManager.decisionAtacar(obj));
 			return hechizos.stream().filter(hec -> hec.getNombre().contains("Ataque")).findFirst();
 		}
 
 		// verificar que hay hechizos
-		if (hechizos.size() == 0)
-			hechizos.add(new CreadorHechizoAtaque().crearHechizo()); // invoca un nuevo hechizo
+
+		hechizos.add(new CreadorHechizoAtaque().crearHechizo()); // invoca un nuevo hechizo
 
 		return null; // A reemplazar
 	}
@@ -177,11 +177,15 @@ public abstract class Personaje {
 		}
 
 		if (enemigoElegido.isEmpty()) {
+			System.out.println(
+					"-->" + this.getNombre() + "lanza un hechizo de curacion/defensa a " + this.enemigoElegido);
 			hechizo.get().ejecutar(this);
 		} else {
 			System.out.println("->" + this.getNombre() + "lanza un hechizo de ataque a " + this.enemigoElegido);
 			hechizo.get().ejecutar(obj.getCombatiente(this.enemigoElegido));
 		}
+
+		hechizos.removeIf(hec -> hec.getNombre().equals(hechizo.get().getNombre()));
 
 		this.restarMana(hechizo.get().getCosto());
 	}
@@ -221,9 +225,9 @@ public abstract class Personaje {
 	private void morir() {
 
 		this.vida = 0;
-		this.vivo = false;
 		this.defensa = 0;
 		this.mana = 0;
+		this.vivo = false;
 	}
 
 	public void recibirDefensa(double defensa) {
@@ -277,7 +281,6 @@ public abstract class Personaje {
 						+ this.getVida() + " puntos de Vida!");
 			}
 		} else {
-
 			this.restarVida(danio);
 			System.out.println("El Personaje " + this.getNombre() + " ha sufrido daño! Queda con " + this.getVida()
 					+ " puntos de Vida!");
@@ -288,7 +291,7 @@ public abstract class Personaje {
 	private void mensajeMuerto() {
 
 		// throw new RuntimeException
-		System.out.println(this.nombre + " ha caído en batalla. El hechizo no surtió efecto!");
+		System.out.println(this.nombre + " ha caído en batalla.");
 	}
 
 	// setStrategyHechizo() : Hechizo
@@ -298,7 +301,8 @@ public abstract class Personaje {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		// if (o == null || getClass() != o.getClass())
+		if (o == null || !(o instanceof Personaje))
 			return false;
 		Personaje persona = (Personaje) o;
 		return Objects.equals(nombre, persona.getNombre());
