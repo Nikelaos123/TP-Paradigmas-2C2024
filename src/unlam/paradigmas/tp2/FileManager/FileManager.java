@@ -21,8 +21,13 @@ public class FileManager {
     // "src/main/querys/rivalesMagos.pl"; //archivo actualizable por ronda
     // private static final String filePathConocimientosMortifagos =
     // "src/main/querys/rivalesMortifagos.pl"; //archivo actualizable por ronda
-    private static final String FILEPATH_RIVALES = "src/main/querys/rivales.pl"; // archivo actualizable por ronda
-    private static final String FILEPATH_FUNCIONES = "src/main/querys/consultas.pl"; // archivo a no modificar
+    private static final String FILEPATH_RIVALES = "src/unlam/paradigmas/tp2/FileManager/querys/rivales.pl"; // archivo
+                                                                                                             // actualizable
+                                                                                                             // por
+                                                                                                             // ronda
+    private static final String FILEPATH_FUNCIONES = "src/unlam/paradigmas/tp2/FileManager/querys/consultas.pl"; // archivo
+                                                                                                                 // a no
+                                                                                                                 // modificar
 
     private Query query;
 
@@ -61,7 +66,7 @@ public class FileManager {
         System.out.println("-> Magos");
 
         for (Mago mago : batallonMagos.getBatallon()) {
-            System.out.println(mago.darReporteCompleto());
+            System.out.println(mago.darReporte());
         }
 
     }
@@ -76,7 +81,7 @@ public class FileManager {
         System.out.println("-> Mortigafos");
 
         for (Mortifago mortifago : batallonMortifagos.getBatallon()) {
-            System.out.println(mortifago.darReporteCompleto());
+            System.out.println(mortifago.darReporte());
         }
 
     }
@@ -182,7 +187,28 @@ public class FileManager {
 
         query = new Query("menosVida(R)");
 
-        return query.oneSolution().get("R").toString();
+        String rival = query.oneSolution().get("R").toString();
+        return rival;
+    }
+
+    public String verificarVivos() {
+        /*
+         * this.actualizarFileLogGenerico(batallonEnemigo);
+         * 
+         */query = new Query("consult('" + FILEPATH_RIVALES + "')");
+
+        if (query.hasSolution()) {
+            System.out.println("Archivo Prolog cargado correctamente.");
+        } else {
+            System.out.println("No se pudo cargar el archivo Prolog.");
+            throw new RuntimeException("Error al abrir el archivo de rivales");
+        }
+
+        query = new Query("vivos(R)");
+
+        String rivales = query.oneSolution().get("R").toString();
+
+        return rivales;
     }
 
     /*

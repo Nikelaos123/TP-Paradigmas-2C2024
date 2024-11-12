@@ -23,13 +23,15 @@ public abstract class Batallon<T> {
         this.cantidadCombatientes = cantidadCombatientes;
     }
 
-    public void agregar(T combatiente) {
+    public void agregarCombatiente(T combatiente) {
         combatientes.add(combatiente);
     }
 
-    public abstract void agregar();
+    public abstract void generarBatallon();
 
     public abstract Set<T> getBatallon();
+
+    public abstract Personaje getCombatiente(String nombre);
 
     public int getTotalCombatientes() {
         return combatientes.size();
@@ -43,6 +45,6 @@ public abstract class Batallon<T> {
 
     public abstract boolean hayVivos();
 
-    public abstract void atacarEnGrupo(Batallon<T> rivales);
+    public abstract boolean atacarEnGrupo(Batallon<T> rivales);
 
 }

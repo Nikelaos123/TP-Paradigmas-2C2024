@@ -42,20 +42,33 @@ public class BatallonMagos extends Batallon<Mago> {
     }
 
     @Override
-    public void atacarEnGrupo(Batallon rivales) {
+    public boolean atacarEnGrupo(Batallon rivales) {
         if (getVivos() == 0)
-            return; // Se podría agregar un mensaje
+            return false; // Se podría agregar un mensaje
 
         for (Mago mago : combatientes) {
-            mago.atacar(rivales);
+            if (!mago.atacar(rivales))
+                return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void generarBatallon() {
+        while (combatientes.size() < this.cantidadCombatientes) {
+            combatientes.add(new PersonajeFactory().crearMago());
         }
     }
 
     @Override
-    public void agregar() {
-        while (combatientes.size() < this.cantidadCombatientes) {
-            combatientes.add(new PersonajeFactory().crearMago());
+    public Mago getCombatiente(String nombre) {
+        for (Mago mago : combatientes) {
+            if (mago.getNombre().toLowerCase().equals(nombre))
+                return mago;
         }
+
+        return null;
     }
 
 }

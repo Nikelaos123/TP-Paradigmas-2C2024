@@ -1,25 +1,7 @@
 package unlam.paradigmas.tp2.main;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.jpl7.Atom;
-import org.jpl7.Query;
-import org.jpl7.Term;
-import org.jpl7.Variable;
-import org.jpl7.fli.fid_t;
-
 import unlam.paradigmas.tp2.FileManager.FileManager;
-import unlam.paradigmas.tp2.hechizos.CreadorHechizoAtaque;
-import unlam.paradigmas.tp2.hechizos.CreadorHechizoDefensa;
-import unlam.paradigmas.tp2.hechizos.CreadorHechizoSanacion;
-import unlam.paradigmas.tp2.hechizos.HechizoFactory;
-import unlam.paradigmas.tp2.hechizos.HechizoSanacion;
 import unlam.paradigmas.tp2.personajes.*;
-import unlam.paradigmas.tp2.personajes.magos.*;
-import unlam.paradigmas.tp2.personajes.mortifagos.*;
 
 public class Main {
 
@@ -67,39 +49,42 @@ public class Main {
 		 * hechizoFactoryDefensa.crearHechizo();
 		 */
 
-		PersonajeFactory fabricaDePersonajes = new PersonajeFactory();
+		// PersonajeFactory fabricaDePersonajes = new PersonajeFactory();
 
 		BatallonMagos batallonMagos = new BatallonMagos();
 		BatallonMortifagos batallonMortigafos = new BatallonMortifagos();
 
-		Batallon batallonGenerico = new BatallonMortifagos();
+		// Batallon batallonGenerico = new BatallonMortifagos();
 
 		FileManager fm = new FileManager();
 
-		batallonMagos.agregar();
+		batallonMagos.generarBatallon();
 
-		batallonMortigafos.agregar(fabricaDePersonajes.crearMortifago());
-
-		for (int i = 0; i <= 5; i++) {
-
-			batallonGenerico.agregar(fabricaDePersonajes.crearMortifago());
-
-		}
+		batallonMortigafos.generarBatallon();
 
 		// fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
 
 		// fm.actualizarFileLogMagos(batallonMagos);
 		// fm.actualizarFileLogMortifagos(batallonMortigafos);
 		// fm.actualizarFileLogGenerico(batallonMagos);
+		int contadorTurnos = 0;
+		fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
 
-		while (batallonMagos.hayVivos() || batallonMortigafos.hayVivos()) {
+		while (batallonMagos.hayVivos() && batallonMortigafos.hayVivos()) {
+
 			batallonMagos.atacarEnGrupo(batallonMortigafos);
-			batallonMortigafos.atacarEnGrupo(batallonMagos);
+
+			if (batallonMortigafos.hayVivos())
+				batallonMortigafos.atacarEnGrupo(batallonMagos);
+
 		}
+
+		System.out.println("-------------------------->>YESSSSSSS");
+		fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
 
 		// Quien ganó?
 		if (batallonMagos.hayVivos()) {
-
+			fm.mostrarLogMagos(batallonMagos);
 			System.out.println("GANARON LOS MAGOS");
 			return;
 		}
@@ -113,115 +98,6 @@ public class Main {
 		// no tiene que llegar
 		System.out.println("HELP");
 
-		/*
-		 * Query q = new Query("consult('"+ "src/main/querys/rivales.pl" +"')");
-		 * q = new Query("consult('"+ "src/main/querys/consultas.pl" +"')");
-		 * q = new Query("menosVida(R)");
-		 * 
-		 * System.out.println(q.oneSolution().get("R"));
-		 */
-
-		/*
-		 * Query q = new Query("consult('" + "src/main/querys/rivales.pl" + "')");
-		 * if(q.hasSolution()) {
-		 * System.out.println("Archivo Prolog cargado correctamente.");
-		 * } else {
-		 * System.out.println("No se pudo cargar el archivo Prolog.");
-		 * return;
-		 * }
-		 * 
-		 * q = new Query("consult('" + "src/main/querys/consultas.pl" + "')");
-		 * 
-		 * if(q.hasSolution()) {
-		 * System.out.println("Archivo Prolog cargado correctamente.");
-		 * } else {
-		 * System.out.println("No se pudo cargar el archivo Prolog.");
-		 * return;
-		 * }
-		 * 
-		 * q = new Query("menosVida(R)");
-		 * 
-		 * System.out.println(q.oneSolution().get("R"));
-		 */
-
-		/**/
-		/// ACAAAAAAAAAAAAAAAAAAAA
-		// Obtengo datos
-		/**//*
-			 * 
-			 * 
-			 * 
-			 * 
-			 * // Consultar si el hecho "hechizo(expecto_patronum)" es verdadero
-			 * Query consultaHechizo = new Query("menosVida(R)");
-			 * 
-			 * Map<String, Term> solution = new HashMap<String,Term>() ;
-			 * solution = consultaHechizo.oneSolution();
-			 * System.out.println(solution.get("R"));
-			 * 
-			 * System.out.println("¿Total?: " + consultaHechizo.allSolutions().length );
-			 * 
-			 * while (consultaHechizo.hasMoreSolutions()) { // until a good sol is found
-			 * 
-			 * solution = consultaHechizo.nextSolution();
-			 * 
-			 * }/*
-			 * 
-			 * 
-			 * /*try {
-			 * // Crear el archivo Prolog
-			 * FileWriter logger = new FileWriter("src/main/querys/rivales.pl");
-			 * 
-			 * // Escribir los hechos en el archivo
-			 * for (Mago mago : batallonMagos.getMagos()) {
-			 * logger.write("rival(" + mago.toPrologStr() + ").\n");
-			 * }
-			 * 
-			 * logger.close();
-			 * System.out.println("Archivo generado con éxito!");
-			 * 
-			 * } catch (Exception e) {
-			 * System.out.println("Error al escribir el log.");
-			 * e.printStackTrace();
-			 * }
-			 */
-
-		// System.out.println("testsita");
-
-		// String filePath = "C:/Users/Abigail/Downloads/consultas.pl";
-
-		// Consultar si "energia_suficiente(harry_potter)" es verdadero
-		// Query consultaEnergia = new Query("energia_suficiente(harry_potter)");
-		// System.out.println("¿Harry Potter tiene energía suficiente?: " +
-		// consultaEnergia.hasSolution());
-
-		/*
-		 * // Consultar si "varita_sauco_disponible" es verdadero
-		 * Query consultaVarita = new Query("varita_sauco_disponible");
-		 * System.out.println("¿La varita de sauco está disponible?: " +
-		 * consultaVarita.hasSolution());
-		 */
-
-		// Auror m1 = new Auror();
-
-		// Batallon batallonMagos1 = new batallonMagos();
-
-		// batallonMagos1.agregar(m1);
-
-		// System.out.println(batallonMagos1.getVivos());
-
-		try {
-			// String connect = "consult('a.pl')"; //../unlam/paradigmas/tp2/
-			// Query con = new Query(connect);
-			// System.out.println(con.hasMoreSolutions());
-
-			// Query q1 = new Query("consult", new Term[] {new Atom("a.pl")});
-			// System.out.println( "consult " + (q1.hasSolution() ? "succeeded" :
-			// "failed"));
-			// System.out.println(System.getProperty("java.library.path"));
-		} catch (Exception e) {
-			System.out.println("PORFA");
-		}
 	}
 
 }

@@ -13,9 +13,9 @@ vivos(Res):-
 
 %decisiones de estrategia
 
-curarse(Vida):- Vida < 50.
+curarse(Vida):- Vida < 10.
 
-defenderse(Defensa):- Defensa < 25.
+defenderse(Defensa):- Defensa < 15.
 
 menosVida(Rival) :-
     rival(Rival, Vida, Def), Vida > 0, PT1 is Vida + Def,

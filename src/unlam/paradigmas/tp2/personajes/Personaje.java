@@ -70,43 +70,6 @@ public abstract class Personaje {
 	public void removerHechizo(String nombreHechizo) {
 
 		hechizos.removeIf(hechizo -> hechizo.getNombre().equals(nombreHechizo));
-
-	}
-
-	// Implementa Strategy
-	public Optional<Hechizo> elegirHechizo(Batallon obj) {
-
-		FileManager fm = new FileManager();
-
-		// Consulta si tiene el hechizo de curacion y si debe usar hechizo sanacion
-		if (hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Sanacion")) && fm.decisionCurarse(vida)) {
-			return hechizos.stream().filter(hec -> hec.getNombre().contains("Sanacion")).findFirst();
-		}
-
-		if (hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Defensa"))
-				&& fm.decisionDefenderse(this.defensa)) {
-			return hechizos.stream().filter(hec -> hec.getNombre().contains("Defensa")).findFirst();
-		}
-
-		if (hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Ataque"))) {
-			// falta elegir a quien atacar, hay que llamar al fm y ejectuar menosVida
-			this.setEnemigoElegido(fm.decisionAtacar(obj));
-			return hechizos.stream().filter(hec -> hec.getNombre().contains("Ataque")).findFirst();
-		}
-
-		// verificar que hay hechizos
-		if (hechizos.size() == 0)
-			hechizos.add(new CreadorHechizoAtaque().crearHechizo()); // invoca un nuevo hechizo
-
-		return null; // A reemplazar
-	}
-
-	private void setEnemigoElegido(String enemigo) {
-		this.enemigoElegido = enemigo;
-	}
-
-	public boolean getVivo() {
-		return vivo;
 	}
 
 	// A usar en FileManager cuando se muestra el Log
@@ -124,64 +87,103 @@ public abstract class Personaje {
 				"\n / Estado: " + (this.getVivo() ? "En Combate" : "Fuera de Combate");
 	}
 
+	private void setEnemigoElegido(String enemigo) {
+		this.enemigoElegido = enemigo;
+	}
+
+	public boolean getVivo() {
+		return vivo;
+	}
+
 	// retorna true si hay mana suficiente para el mayor coste
 	public boolean verificarMana() {
 
-		double maxManaRequerido = 0;
+		double maxManaRequerido = 5;
 
-		for (Hechizo hechizo : hechizos) {
-			if (hechizo.getCosto() > maxManaRequerido)
-				maxManaRequerido = hechizo.getCosto();
-		}
+		/*
+		 * for (Hechizo hechizo : hechizos) {
+		 * if (hechizo.getCosto() > maxManaRequerido)
+		 * maxManaRequerido = hechizo.getCosto();
+		 * }
+		 */
 
 		return mana >= maxManaRequerido;
 	}
 
 	public void descansar() {
-		this.recibirMana(15);
+		System.out.println("-" + this.getNombre() + " se dispone a descansar.");
+		this.recibirMana(25);
 	}
 
+	// Implementa Strategy
+	private Optional<Hechizo> elegirHechizo(Batallon obj) {
+
+		FileManager fileManager = new FileManager();
+
+		// Consulta si tiene el hechizo de curacion y si debe usar hechizo sanacion
+		if (hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Sanacion"))
+				&& fileManager.decisionCurarse(vida)) {
+			setEnemigoElegido("");
+			return hechizos.stream().filter(hec -> hec.getNombre().contains("Sanacion")).findFirst();
+		}
+
+		// Consulta si tiene el hechizo de defensa y si debe usar hechizo defensa
+		if (hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Defensa"))
+				&& fileManager.decisionDefenderse(this.defensa)) {
+			setEnemigoElegido("");
+			return hechizos.stream().filter(hec -> hec.getNombre().contains("Defensa")).findFirst();
+		}
+
+		// Consulta si tiene el hechizo de ataque y a quien atacar
+		if (hechizos.stream().anyMatch(hec -> hec.getNombre().contains("Ataque"))) {
+			// falta elegir a quien atacar, hay que llamar al fm y ejectuar menosVida
+			this.setEnemigoElegido(fileManager.decisionAtacar(obj));
+			return hechizos.stream().filter(hec -> hec.getNombre().contains("Ataque")).findFirst();
+		}
+
+		// verificar que hay hechizos
+		if (hechizos.size() == 0)
+			hechizos.add(new CreadorHechizoAtaque().crearHechizo()); // invoca un nuevo hechizo
+
+		return null; // A reemplazar
+	}
+
+	// Realizar Turno
 	public boolean atacar(Batallon obj) {
+
+		if (!obj.hayVivos())
+			return false;
 
 		if (!this.vivo)
 			return false;
 
+		System.out.println(
+				"-->Es turno de " + this.getNombre() + "! (" + this.vida + "/" + this.defensa + "/" + this.mana + ")");
+
 		if (!verificarMana()) {
 			this.descansar();
-			return false;
+			return true;
 		}
 
-		this.lanzarHechizo(elegirHechizo(obj));
+		this.lanzarHechizo(elegirHechizo(obj), obj);
 		return true;
 	}
 
-	// A borrar
-	/*
-	 * public boolean atacar(Personaje obj) {
-	 * if(!this.vivo)
-	 * return false;
-	 * 
-	 * if(!verificarMana())
-	 * {
-	 * this.descansar();
-	 * return false;
-	 * }
-	 * 
-	 * this.lanzarHechizo(elegirHechizo(null));
-	 * return true;
-	 * }
-	 */
-
-	public void lanzarHechizo(Optional<Hechizo> hechizo) {
+	private void lanzarHechizo(Optional<Hechizo> hechizo, Batallon obj) {
 
 		if (hechizo == null) {
 			this.descansar();
 			return;
 		}
 
-		// hechizos.contains(objetivo) .ejecutar(objetivo);
+		if (enemigoElegido.isEmpty()) {
+			hechizo.get().ejecutar(this);
+		} else {
+			System.out.println("->" + this.getNombre() + "lanza un hechizo de ataque a " + this.enemigoElegido);
+			hechizo.get().ejecutar(obj.getCombatiente(this.enemigoElegido));
+		}
 
-		mana -= hechizos.getFirst().getCosto();
+		this.restarMana(hechizo.get().getCosto());
 	}
 
 	private void sumarVida(double vida) {
@@ -200,10 +202,20 @@ public abstract class Personaje {
 			this.morir();
 	}
 
+	private void restarMana(double mana) {
+
+		if ((this.mana - mana) < 0)
+			this.mana = 0;
+		else
+			this.mana -= mana;
+	}
+
+	private void sumarMana(double mana) {
+		this.mana += mana;
+	}
+
 	private void restarDefensa(double danio) {
-
 		this.defensa -= danio;
-
 	}
 
 	private void morir() {
@@ -220,8 +232,8 @@ public abstract class Personaje {
 			this.mensajeMuerto();
 
 		} else {
-
 			this.defensa += defensa;
+			System.out.println(this.getNombre() + " recibió " + defensa + " puntos de defensa.");
 		}
 	}
 
@@ -231,8 +243,8 @@ public abstract class Personaje {
 			this.mensajeMuerto();
 
 		} else {
-
-			this.sumarVida(mana);
+			this.sumarMana(mana);
+			System.out.println(this.getNombre() + " recibió " + mana + " puntos de mana.");
 		}
 	}
 
@@ -253,20 +265,20 @@ public abstract class Personaje {
 
 			this.mensajeMuerto();
 
+		} else if (this.getDefensa() > 0) {
+			if (this.getDefensa() > danio) {
+				this.restarDefensa(danio);
+			} else {
+				double restaDanio = danio - this.getDefensa();
+				this.restarDefensa(this.getDefensa());
+				System.out.println("El Personaje " + this.getNombre() + " ha perdido su defensa!");
+				this.restarVida(restaDanio);
+				System.out.println("El Personaje " + this.getNombre() + " ha sufrido daño! Queda con "
+						+ this.getVida() + " puntos de Vida!");
+			}
 		} else {
-			if (this.getDefensa() > 0)
-				if (this.getDefensa() > danio)
-					this.restarDefensa(danio);
-				else {
-					double restaDanio = danio - this.getDefensa();
-					this.restarDefensa(this.getDefensa());
-					System.out.println("El Personaje " + this.getNombre() + " ha perdido su defensa!");
-					this.restarVida(restaDanio);
-					System.out.println("El Personaje " + this.getNombre() + " ha sufrido daño! Queda con "
-							+ this.getVida() + " puntos de Vida!");
-				}
-			else
-				this.restarVida(danio);
+
+			this.restarVida(danio);
 			System.out.println("El Personaje " + this.getNombre() + " ha sufrido daño! Queda con " + this.getVida()
 					+ " puntos de Vida!");
 		}
