@@ -178,10 +178,10 @@ public abstract class Personaje {
 
 		if (enemigoElegido.isEmpty()) {
 			System.out.println(
-					"-->" + this.getNombre() + "lanza un hechizo de curacion/defensa a " + this.enemigoElegido);
+					"-->" + this.getNombre() + " lanza un hechizo de sanacion/defensa.");
 			hechizo.get().ejecutar(this);
 		} else {
-			System.out.println("->" + this.getNombre() + "lanza un hechizo de ataque a " + this.enemigoElegido);
+			System.out.println("->" + this.getNombre() + " lanza un hechizo de ataque a " + this.enemigoElegido);
 			hechizo.get().ejecutar(obj.getCombatiente(this.enemigoElegido));
 		}
 
@@ -275,7 +275,7 @@ public abstract class Personaje {
 			} else {
 				double restaDanio = danio - this.getDefensa();
 				this.restarDefensa(this.getDefensa());
-				System.out.println("El Personaje " + this.getNombre() + " ha perdido su defensa!");
+				System.out.print("El Personaje " + this.getNombre() + " ha perdido su defensa!");
 				this.restarVida(restaDanio);
 				System.out.println("El Personaje " + this.getNombre() + " ha sufrido daño! Queda con "
 						+ this.getVida() + " puntos de Vida!");

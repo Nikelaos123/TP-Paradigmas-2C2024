@@ -66,7 +66,7 @@ public class FileManager {
         System.out.println("-> Magos");
 
         for (Mago mago : batallonMagos.getBatallon()) {
-            System.out.println(mago.darReporte());
+            System.out.println(mago.darReporteCompleto());
         }
 
     }
@@ -81,7 +81,7 @@ public class FileManager {
         System.out.println("-> Mortigafos");
 
         for (Mortifago mortifago : batallonMortifagos.getBatallon()) {
-            System.out.println(mortifago.darReporte());
+            System.out.println(mortifago.darReporteCompleto());
         }
 
     }
@@ -97,7 +97,7 @@ public class FileManager {
             }
 
             logger.close();
-            System.out.println("Archivo '" + FILEPATH_RIVALES + "' generado con éxito!");
+            // System.out.println("Archivo '" + FILEPATH_RIVALES + "' generado con éxito!");
 
         } catch (Exception e) {
             System.out.println("Error al escribir el log. " + e.getMessage());
@@ -105,50 +105,6 @@ public class FileManager {
         }
         return true;
     }
-    /*
-     * public boolean actualizarFileLogMagos(BatallonMagos batallonMagos) {
-     * try {
-     * // Crear el archivo Prolog
-     * FileWriter logger = new FileWriter(filePathConocimientosMagos);
-     * 
-     * // Escribir los hechos en el archivo
-     * for (Mago mago : batallonMagos.getBatallon()) {
-     * logger.write("rival(" + mago.toPrologStr() + ").\n");
-     * }
-     * 
-     * logger.close();
-     * System.out.println("Archivo '"+ filePathConocimientosMagos
-     * +"' generado con éxito!");
-     * 
-     * } catch (Exception e) {
-     * System.out.println("Error al escribir el log. " + e.getMessage());
-     * return false;
-     * }
-     * return true;
-     * }
-     * 
-     * public boolean actualizarFileLogMortifagos(BatallonMortifagos
-     * batallonMortifagos) {
-     * try {
-     * // Crear el archivo Prolog
-     * FileWriter logger = new FileWriter(filePathConocimientosMortifagos);
-     * 
-     * // Escribir los hechos en el archivo
-     * for (Mortifago mortifago : batallonMortifagos.getBatallon()) {
-     * logger.write("rival(" + mortifago.toPrologStr() + ").\n");
-     * }
-     * 
-     * logger.close();
-     * System.out.println("Archivo '"+ filePathConocimientosMortifagos
-     * +"' generado con éxito!");
-     * 
-     * } catch (Exception e) {
-     * System.out.println("Error al escribir el log. " + e.getMessage());
-     * return false;
-     * }
-     * return true;
-     * }
-     */
 
     // - - - - - - - - - - Decisiones - - - - - - - - - -
     public boolean decisionCurarse(double puntosVida) {
@@ -179,7 +135,7 @@ public class FileManager {
         query = new Query("consult('" + FILEPATH_RIVALES + "')");
 
         if (query.hasSolution()) {
-            System.out.println("Archivo Prolog cargado correctamente.");
+            // System.out.println("Archivo Prolog cargado correctamente.");
         } else {
             System.out.println("No se pudo cargar el archivo Prolog.");
             throw new RuntimeException("Error al abrir el archivo de rivales");
@@ -192,13 +148,10 @@ public class FileManager {
     }
 
     public String verificarVivos() {
-        /*
-         * this.actualizarFileLogGenerico(batallonEnemigo);
-         * 
-         */query = new Query("consult('" + FILEPATH_RIVALES + "')");
+        query = new Query("consult('" + FILEPATH_RIVALES + "')");
 
         if (query.hasSolution()) {
-            System.out.println("Archivo Prolog cargado correctamente.");
+            // System.out.println("Archivo Prolog cargado correctamente.");
         } else {
             System.out.println("No se pudo cargar el archivo Prolog.");
             throw new RuntimeException("Error al abrir el archivo de rivales");
@@ -211,22 +164,4 @@ public class FileManager {
         return rivales;
     }
 
-    /*
-     * try {
-     * // Crear el archivo Prolog
-     * FileWriter logger = new FileWriter("src/main/querys/rivales.pl");
-     * 
-     * // Escribir los hechos en el archivo
-     * for (Mago mago : batallonMagos.getBatallon()) {
-     * logger.write("rival(" + mago.toPrologStr() + ").\n");
-     * }
-     * 
-     * logger.close();
-     * System.out.println("Archivo generado con éxito!");
-     * 
-     * } catch (Exception e) {
-     * System.out.println("Error al escribir el log.");
-     * e.printStackTrace();
-     * }
-     */
 }

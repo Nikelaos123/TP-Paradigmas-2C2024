@@ -15,15 +15,15 @@ public class CreadorHechizoAtaque extends HechizoFactory {
 
 		switch (numeroAleatorio) {
 			case 1:
-				System.out.println("Se creó un hechizo de Ataque Debil");
+				// System.out.println("Se creó un hechizo de Ataque Debil");
 				return new HechizoAtaque("Ataque - Debil", 25, 100);
 
 			case 2:
-				System.out.println("Se creó un hechizo de Ataque Comun");
+				// System.out.println("Se creó un hechizo de Ataque Comun");
 				return new HechizoAtaque("Ataque - Comun", 30, 150);
 
 			case 3:
-				System.out.println("Se creó un hechizo de Ataque Fuerte!");
+				// System.out.println("Se creó un hechizo de Ataque Fuerte!");
 				return new HechizoAtaque("Ataque - Fuerte", 35, 200);
 		}
 
