@@ -80,7 +80,8 @@ public abstract class Personaje {
 	}
 
 	public String darReporteCompleto() {
-		return this.getNombre() + " / Puntos de Vida:  " + this.getVida() +
+		return this.getNombre() +
+				"\n / Puntos de Vida:  " + this.getVida() +
 				"\n / MP:" + this.getMana() +
 				"\n / Defensa: " + this.getDefensa() +
 				"\n / Hechizos Disponibles: " + hechizos.size() +

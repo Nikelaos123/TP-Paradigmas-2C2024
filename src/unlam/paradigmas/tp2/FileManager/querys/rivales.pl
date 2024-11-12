@@ -1,5 +1,5 @@
-rival(aquamaris, 0, 0).
-rival(ignis, 0, 0).
-rival(bernard, 0, 0).
-rival(lyra, 130, 0).
-rival(freya, 0, 0).
+rival(salakar, 360, 180).
+rival(daemon, 360, 180).
+rival(ravok, 200, 100).
+rival(astarot, 360, 180).
+rival(nerathor, 200, 100).

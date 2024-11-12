@@ -10,7 +10,7 @@ public class Auror extends Mago {
 		super(nombre);
 		this.potenciadorLealtad = 1.6;
 		this.mana *= potenciadorLealtad;
-		this.defensa *= potenciadorLealtad;
+		this.defensa *= potenciadorLealtad; 
 		this.vida *= potenciadorLealtad;
 		this.hechizos.add(new CreadorHechizoAtaque().crearHechizo());
 		this.hechizos.add(new CreadorHechizoDefensa().crearHechizo());

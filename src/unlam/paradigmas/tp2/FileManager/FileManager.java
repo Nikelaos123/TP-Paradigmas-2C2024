@@ -147,7 +147,7 @@ public class FileManager {
         return rival;
     }
 
-    public String verificarVivos() {
+    public boolean verificarVivos() {
         query = new Query("consult('" + FILEPATH_RIVALES + "')");
 
         if (query.hasSolution()) {
@@ -161,7 +161,7 @@ public class FileManager {
 
         String rivales = query.oneSolution().get("R").toString();
 
-        return rivales;
+        return rivales.isEmpty();
     }
 
 }

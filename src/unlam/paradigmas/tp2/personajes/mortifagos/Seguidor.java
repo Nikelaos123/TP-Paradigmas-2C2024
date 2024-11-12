@@ -7,7 +7,7 @@ public class Seguidor extends Mortifago {
 
 	public Seguidor(String nombre) {
 		super(nombre);
-		this.potenciadorMalvado = 1.4;
+		this.potenciadorMalvado = 1.5;
 		this.mana *= potenciadorMalvado;
 		this.hechizos.add(new CreadorHechizoAtaque().crearHechizo());
 		this.hechizos.add(new CreadorHechizoDefensa().crearHechizo());

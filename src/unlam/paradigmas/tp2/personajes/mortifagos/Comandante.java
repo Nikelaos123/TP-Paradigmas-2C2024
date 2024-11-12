@@ -8,7 +8,7 @@ public class Comandante extends Mortifago {
 
 	public Comandante(String nombre) {
 		super(nombre);
-		this.potenciadorMalvado = 1.7;
+		this.potenciadorMalvado = 1.8;
 		this.vida *= potenciadorMalvado;
 		this.defensa *= potenciadorMalvado;
 		this.mana *= potenciadorMalvado;
