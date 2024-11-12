@@ -3,17 +3,18 @@ package unlam.paradigmas.tp2.main;
 import unlam.paradigmas.tp2.FileManager.FileManager;
 import unlam.paradigmas.tp2.personajes.*;
 
-public class Main {
+public class BatallaMagosContraMortifagos {
 
 	public static void main(String[] args) {
 
+		// Creacion de batallones
 		BatallonMagos batallonMagos = new BatallonMagos();
 		BatallonMortifagos batallonMortigafos = new BatallonMortifagos();
 
+		// Creacion de
 		FileManager fm = new FileManager();
 
 		batallonMagos.generarBatallon();
-
 		batallonMortigafos.generarBatallon();
 
 		int contadorRonda = 1;

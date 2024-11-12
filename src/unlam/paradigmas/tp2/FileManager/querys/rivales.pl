@@ -1,5 +1,5 @@
-rival(ravok, 0, 0).
-rival(drakoth, 0, 0).
-rival(nerathor, 0, 0).
-rival(vorgar, 0, 0).
-rival(veromos, 40, 0).
+rival(aquamaris, 0, 0).
+rival(bernard, 0, 0).
+rival(lucas, 0, 0).
+rival(hornet, 0, 0).
+rival(luna, 30, 0).
