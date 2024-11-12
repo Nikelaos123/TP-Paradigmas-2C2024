@@ -96,7 +96,7 @@ public abstract class Personaje {
 	public boolean getVivo() {
 		return vivo;
 	}
-	
+
 	public int getCantidadHechizos() {
 		return hechizos.size();
 	}
@@ -296,12 +296,8 @@ public abstract class Personaje {
 
 	private void mensajeMuerto() {
 
-		// throw new RuntimeException
 		System.out.println(this.nombre + " ha caído en batalla.");
 	}
-
-	// setStrategyHechizo() : Hechizo
-	// public void mostrarHechizos()
 
 	@Override
 	public boolean equals(Object o) {
@@ -319,5 +315,4 @@ public abstract class Personaje {
 		return Objects.hash(nombre);
 	}
 
-	
 }

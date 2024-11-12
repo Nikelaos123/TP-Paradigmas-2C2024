@@ -1,5 +1,5 @@
-rival(salakar, 360, 180).
-rival(daemon, 360, 180).
-rival(ravok, 200, 100).
-rival(astarot, 360, 180).
-rival(nerathor, 200, 100).
+rival(ravok, 0, 0).
+rival(drakoth, 0, 0).
+rival(nerathor, 0, 0).
+rival(vorgar, 0, 0).
+rival(veromos, 40, 0).

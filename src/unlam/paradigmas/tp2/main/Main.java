@@ -10,19 +10,12 @@ public class Main {
 		BatallonMagos batallonMagos = new BatallonMagos();
 		BatallonMortifagos batallonMortigafos = new BatallonMortifagos();
 
-		// Batallon batallonGenerico = new BatallonMortifagos();
-
 		FileManager fm = new FileManager();
 
 		batallonMagos.generarBatallon();
 
 		batallonMortigafos.generarBatallon();
 
-		// fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
-
-		// fm.actualizarFileLogMagos(batallonMagos);
-		// fm.actualizarFileLogMortifagos(batallonMortigafos);
-		// fm.actualizarFileLogGenerico(batallonMagos);
 		int contadorRonda = 1;
 		fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
 
@@ -40,7 +33,6 @@ public class Main {
 		}
 
 		System.out.println("------------------->> FINAL DEL COMBATE <<-------------------");
-		// fm.mostrarLogCompleto(batallonMagos, batallonMortigafos);
 
 		// Quien ganó?
 		if (batallonMagos.hayVivos()) {
